@@ -17,6 +17,11 @@ class Vector {
 public:
 	Vector(long double * initial_components, int initial_size);
 	virtual ~Vector();
+	long double * getComponentsAddress();
+	int getSize();
+	bool testEquality(Vector otherVector);
+	bool add(Vector vector1, Vector vector2);
+	bool scale(long double alpha);
 };
 
 #endif /* VECTOR_H_ */
