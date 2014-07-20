@@ -13,20 +13,6 @@ Vector::Vector(long double * initial_components, int initial_size) {
 	size = initial_size;
 }
 
-Vector::Vector(const Vector& v) {
-	Vector vec = v;
-	size = vec.getSize();
-	long double * elements = vec.getComponentsAddress();
-	components = new long double [size];
-	for (int index = 0; index < size; index++) {
-		components[index] = elements[index];
-	}
-}
-
-Vector::~Vector() {
-	delete components;
-}
-
 long double * Vector::getComponentsAddress() {
 	return components;
 }
@@ -35,7 +21,17 @@ int Vector::getSize() {
 	return size;
 }
 
-bool Vector::testEquality(Vector otherVector) {
+bool Vector::copy(Vector& x) {
+	long double * chi = x.getComponentsAddress();
+	int x_size = x.getSize();
+	if (size != x_size) return false;
+	for (int i=0; i<size; i++) {
+		components[i] = chi[i];
+	}
+	return true;
+}
+
+bool Vector::testEquality(Vector& otherVector) {
 	long double * otherComponents = otherVector.getComponentsAddress();
 	int otherSize = otherVector.getSize();
 	if (size != otherSize) return false;
@@ -45,7 +41,7 @@ bool Vector::testEquality(Vector otherVector) {
 	return true;
 }
 
-bool Vector::add(Vector vector1, Vector vector2) {
+bool Vector::add(Vector& vector1, Vector& vector2) {
 	if (size != vector1.getSize() && size != vector2.getSize()) return false;
 	long double * v1 = vector1.getComponentsAddress();
 	long double * v2 = vector2.getComponentsAddress();
@@ -62,7 +58,7 @@ bool Vector::scale(long double alpha) {
 	return true;
 }
 
-bool Vector::axpy(long double alpha, Vector x) {
+bool Vector::axpy(long double alpha, Vector& x) {
 	if (size != x.getSize()) return false;
 	long double * x_components = x.getComponentsAddress();
 	for (int index = 0; index < size; index++) {
@@ -71,7 +67,7 @@ bool Vector::axpy(long double alpha, Vector x) {
 	return true;
 }
 
-bool Vector::linear_combination(Vector* vectors, Vector coefficients) {
+bool Vector::linear_combination(Vector* vectors, Vector& coefficients) {
 	for (int index = 0; index < size; index++) {
 		components[index] = 0;
 	}
@@ -82,7 +78,7 @@ bool Vector::linear_combination(Vector* vectors, Vector coefficients) {
 	return true;
 }
 
-long double Vector::dot_product(Vector y) {
+long double Vector::dot_product(Vector& y) {
 	long double alpha = 0;
 	if (size != y.getSize()) return 0;
 	long double * y_components = y.getComponentsAddress();

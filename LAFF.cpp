@@ -89,6 +89,23 @@ void test_length() {
 	cout << "length: " << v.length() << endl;
 }
 
+void test_copy() {
+	const int VECTOR_SIZE = 3;
+
+	long double data[] = {1, 2, 3};
+	Vector v(data, VECTOR_SIZE);
+	long double data2[] = {4, 5, 6};
+	Vector x(data2, VECTOR_SIZE);
+	v.copy(x);
+	long double * result = v.getComponentsAddress();
+	cout << "copy: (";
+	for (int index = 0; index < VECTOR_SIZE; index++) {
+		cout << result[index];
+		if (index != VECTOR_SIZE-1) cout << ", ";
+	}
+	cout << ")" << endl;
+}
+
 int main() {
 	test_vector_addition_and_scaling();
 
@@ -97,6 +114,8 @@ int main() {
 	test_dot_product();
 
 	test_length();
+
+	test_copy();
 
 	return 0;
 }
