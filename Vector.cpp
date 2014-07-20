@@ -7,10 +7,44 @@
 
 #include "Vector.h"
 #include <cmath>
+#include <stdlib.h>
+
+Vector::Vector() {
+	components = 0;
+	size = 0;
+	dynamic = false;
+}
 
 Vector::Vector(long double * initial_components, int initial_size) {
 	components = initial_components;
 	size = initial_size;
+	dynamic = false;
+}
+
+Vector& Vector::operator =(const Vector& v) {
+	if (dynamic) delete[] components;
+	size = v.size;
+	components = new long double [size];
+	for (int i=0; i<size; i++) {
+		components[i] = v.components[i];
+	}
+	dynamic = true;
+	return *this;
+}
+
+Vector::Vector(const Vector& v) {
+	size = v.size;
+	components = new long double [size];
+	for (int i=0; i<size; i++) {
+		components[i] = v.components[i];
+	}
+	dynamic = true;
+}
+
+Vector::~Vector() {
+	if (dynamic) {
+		delete[] components;
+	}
 }
 
 long double * Vector::getComponentsAddress() {

@@ -16,7 +16,10 @@
  *       the object goes out of scope. The best strategy, AFAIK, is to have the class be a shallow-copy type, or a deep-copy
  *       type. Since I don't want to incur the expense of deep-copying everything, I'm electing to have this be the shallow-copy
  *       type. Every array that it operates on must be created in the client code.
- *
+ *       It makes the client code a bit awkward, since you have to create an answer vector.
+ *       Light Bulb!! have a switch that tells the destructor whether it was dynamically, or statically created.
+ *       Nope, couldn't get it to work without a memory leak.
+ *       Actually, memory freed may not immediately be reported as freed by the OS. Rechecked, and this looks good.
  */
 
 #ifndef VECTOR_H_
@@ -29,7 +32,12 @@ class Vector {
 	long double * components;
 	int size;
 public:
+	bool dynamic;
+	Vector();
+	Vector& operator= (const Vector&);
+	Vector (const Vector&);
 	Vector(long double * initial_components, int initial_size);
+	~Vector();
 	long double * getComponentsAddress();
 	int getSize();
 	bool copy(Vector& x);
