@@ -75,14 +75,15 @@ bool Vector::testEquality(Vector& otherVector) {
 	return true;
 }
 
-bool Vector::add(Vector& vector1, Vector& vector2) {
-	if (size != vector1.getSize() && size != vector2.getSize()) return false;
-	long double * v1 = vector1.getComponentsAddress();
-	long double * v2 = vector2.getComponentsAddress();
-	for (int index = 0; index < size; index++) {
-		components[index] = v1[index] + v2[index];
+Vector Vector::add(Vector& v) {
+	Vector z(v);
+	long double * elements = z.getComponentsAddress();
+	if (size == v.getSize()) {
+		for (int i=0; i<size; i++) {
+			elements[i] += components[i];
+		}
 	}
-	return true;
+	return z;
 }
 
 bool Vector::scale(long double alpha) {

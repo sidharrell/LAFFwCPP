@@ -22,10 +22,8 @@ void test_vector_addition_and_scaling() {
 	const string test = sample_vector.testEquality(sample_vector2) ? "true" : "false";
 	cout << "vector 1 == vector 2: " << test << endl;
 
-	long double output[VECTOR_SIZE];
-	Vector output_vector(output, VECTOR_SIZE);
-
-	output_vector.add(sample_vector, sample_vector2);
+	Vector output_vector = sample_vector.add(sample_vector2);
+	long double * output = output_vector.getComponentsAddress();
 
 	cout << "vector 3 = vector 1 + vector 2: (";
 	for (int index = 0; index < VECTOR_SIZE; index++) {
@@ -35,8 +33,8 @@ void test_vector_addition_and_scaling() {
 	cout << ")" << endl;
 
 	long double product = 1;
-	for (long double element : output) {
-		product *= element;
+	for (int i=0; i<VECTOR_SIZE; i++) {
+		product *= output[i];
 	}
 	cout << "product of all the components of vector 3: " << product << endl;
 
@@ -71,12 +69,10 @@ void test_dot_product() {
 	const int VECTOR_SIZE = 4;
 
 	long double data[3][VECTOR_SIZE] = { {2, 5, -6, 1}, {1, 2, 3, 4}, {1, 0, 0, 2} };
-	long double answer[] = {0, 0, 0, 0};
 	Vector v[] = { Vector(data[0], VECTOR_SIZE),
 			Vector(data[1], VECTOR_SIZE),
 			Vector(data[2], VECTOR_SIZE) };
-	Vector w = Vector(answer, VECTOR_SIZE);
-	w.add(v[0], v[1]);
+	Vector w = v[0].add(v[1]);
 	long double dot = w.dot_product(v[2]);
 	cout << "(vector 1 + vector 2) dot vector 3: " << dot << endl;
 }
