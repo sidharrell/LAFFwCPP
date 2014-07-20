@@ -16,6 +16,7 @@ class Vector {
 	int size;
 public:
 	Vector(long double * initial_components, int initial_size);
+	Vector(const Vector& v);
 	virtual ~Vector();
 	long double * getComponentsAddress();
 	int getSize();

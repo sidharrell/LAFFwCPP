@@ -11,64 +11,94 @@
 #include "Vector.h"
 using namespace std;
 
-int main() {
-	array<long double, 4> data1 {2, 3, 4, 5};
-	array<long double, 4> data2 {6, 7, 8, 9};
-	array<long double, 4> output;
-	Vector sample_vector(data1.data(),data1.size());
-	Vector sample_vector2(data2.data(),data2.size());
-	Vector output_vector(output.data(), output.size());
+void test_vector_addition_and_scaling() {
+	long double data1[] = {2, 3, 4, 5};
+	long double data2[] = {6, 7, 8, 9};
+	const int VECTOR_SIZE = 4;
+
+	Vector sample_vector(data1, VECTOR_SIZE);
+	Vector sample_vector2(data2, VECTOR_SIZE);
+
+	const string test = sample_vector.testEquality(sample_vector2) ? "true" : "false";
+	cout << "vector 1 == vector 2: " << test << endl;
+
+	long double output[VECTOR_SIZE];
+	Vector output_vector(output, VECTOR_SIZE);
+
 	output_vector.add(sample_vector, sample_vector2);
-	cout << "!!!Hello World!!!" << endl; // prints !!!Hello World!!!
-	long double * output_array = sample_vector.getComponentsAddress();
-	int output_size = sample_vector.getSize();
-	long double product = 1;
-	for (int index = 0; index < output_size; index++) {
-		product *= output_array[index];
-	}
-	cout << "product of all the components of vector 1: " << product << endl;
-	cout << "vector 1 == vector 2: " << sample_vector.testEquality(sample_vector2) << endl;
+
 	cout << "vector 3 = vector 1 + vector 2: (";
-	for (int index = 0; index < output_vector.getSize(); index++) {
-		cout << output_vector.getComponentsAddress()[index];
-		if (index != output_vector.getSize()-1) cout << ", ";
+	for (int index = 0; index < VECTOR_SIZE; index++) {
+		cout << output[index];
+		if (index != VECTOR_SIZE-1) cout << ", ";
 	}
 	cout << ")" << endl;
+
+	long double product = 1;
+	for (long double element : output) {
+		product *= element;
+	}
+	cout << "product of all the components of vector 3: " << product << endl;
+
 	output_vector.scale(-2);
 	cout << "vector 3 scaled by -2: (";
-	for (int index = 0; index < output_vector.getSize(); index++) {
-		cout << output_vector.getComponentsAddress()[index];
-		if (index != output_vector.getSize()-1) cout << ", ";
+	for (int index = 0; index < VECTOR_SIZE; index++) {
+		cout << output[index];
+		if (index != VECTOR_SIZE-1) cout << ", ";
 	}
 	cout << ")" << endl;
-	array<long double, 3> lc_vector_data_1 {1, 0, 0};
-	array<long double, 3> lc_vector_data_2 {0, 1, 0};
-	array<long double, 3> lc_vector_data_3 {0, 0, 1};
-	array<long double, 3> lc_vector_data_4 {-3, 2, 4};
-	array<long double, 3> answer_data {0, 0, 0};
-	Vector lc_vector1(lc_vector_data_1.data(), lc_vector_data_1.size());
-	Vector lc_vector2(lc_vector_data_2.data(), lc_vector_data_2.size());
-	Vector lc_vector3(lc_vector_data_3.data(), lc_vector_data_3.size());
-	Vector matrix[] = {lc_vector1, lc_vector2, lc_vector3};
-	Vector lc_vector4(lc_vector_data_4.data(), lc_vector_data_4.size());
-	Vector answer(answer_data.data(), answer_data.size());
-	answer.linear_combination(matrix, lc_vector4);
+}
+void test_linear_combinations() {
+	const int VECTOR_SIZE = 3;
+
+	long double v[VECTOR_SIZE][VECTOR_SIZE] = { {1, 0, 0}, {0, 1, 0}, {0, 0, 1} };
+	long double x[] = {-3, 2, 4};
+	long double w[] = {0, 0, 0};
+	Vector vec_array[] = {Vector(v[0], VECTOR_SIZE),
+			Vector(v[1], VECTOR_SIZE),
+			Vector(v[2], VECTOR_SIZE)};
+	Vector x_vec(x, VECTOR_SIZE);
+	Vector w_vec(w, VECTOR_SIZE);
+	w_vec.linear_combination(vec_array, x_vec);
 	cout << "linear combination: (";
-	for (int index = 0; index < answer.getSize(); index++) {
-		cout << answer.getComponentsAddress()[index];
-		if (index != answer.getSize()-1) cout << ", ";
+	for (int index = 0; index < VECTOR_SIZE; index++) {
+		cout << w[index];
+		if (index != VECTOR_SIZE-1) cout << ", ";
 	}
 	cout << ")" << endl;
-	array<long double, 4> dot_vector_data_1 {2, 5, -6, 1};
-	array<long double, 4> dot_vector_data_2 {1, 2, 3, 4};
-	array<long double, 4> dot_vector_data_3 {1, 0, 0, 2};
-	array<long double, 4> dot_answer_data {0, 0, 0, 0};
-	Vector dot_vector1(dot_vector_data_1.data(), dot_vector_data_1.size());
-	Vector dot_vector2(dot_vector_data_2.data(), dot_vector_data_2.size());
-	Vector dot_vector3(dot_vector_data_3.data(), dot_vector_data_3.size());
-	Vector dot_answer(dot_answer_data.data(), dot_answer_data.size());
-	dot_answer.add(dot_vector1, dot_vector2);
-	long double dot = dot_answer.dot_product(dot_vector3);
-	cout << "dot product: " << dot << endl;
+}
+void test_dot_product() {
+	const int VECTOR_SIZE = 4;
+
+	long double data[3][VECTOR_SIZE] = { {2, 5, -6, 1}, {1, 2, 3, 4}, {1, 0, 0, 2} };
+	long double answer[] = {0, 0, 0, 0};
+	Vector v[] = { Vector(data[0], VECTOR_SIZE),
+			Vector(data[1], VECTOR_SIZE),
+			Vector(data[2], VECTOR_SIZE) };
+	Vector w = Vector(answer, VECTOR_SIZE);
+	w.add(v[0], v[1]);
+	long double dot = w.dot_product(v[2]);
+	cout << "(vector 1 + vector 2) dot vector 3: " << dot << endl;
+}
+
+void test_length() {
+	const int VECTOR_SIZE = 4;
+
+	long double data[] = {2, 5, -6, 1};
+	Vector v(data, VECTOR_SIZE);
+	cout << "length: " << v.length() << endl;
+}
+
+int main() {
+	test_vector_addition_and_scaling();
+
+	test_linear_combinations();
+
+	test_dot_product();
+
+	test_length();
+
 	return 0;
 }
+
+

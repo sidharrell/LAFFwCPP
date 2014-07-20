@@ -13,8 +13,18 @@ Vector::Vector(long double * initial_components, int initial_size) {
 	size = initial_size;
 }
 
+Vector::Vector(const Vector& v) {
+	Vector vec = v;
+	size = vec.getSize();
+	long double * elements = vec.getComponentsAddress();
+	components = new long double [size];
+	for (int index = 0; index < size; index++) {
+		components[index] = elements[index];
+	}
+}
+
 Vector::~Vector() {
-	// TODO Auto-generated destructor stub
+	delete components;
 }
 
 long double * Vector::getComponentsAddress() {
@@ -37,8 +47,10 @@ bool Vector::testEquality(Vector otherVector) {
 
 bool Vector::add(Vector vector1, Vector vector2) {
 	if (size != vector1.getSize() && size != vector2.getSize()) return false;
+	long double * v1 = vector1.getComponentsAddress();
+	long double * v2 = vector2.getComponentsAddress();
 	for (int index = 0; index < size; index++) {
-		components[index] = vector1.getComponentsAddress()[index] + vector2.getComponentsAddress()[index];
+		components[index] = v1[index] + v2[index];
 	}
 	return true;
 }
@@ -65,7 +77,7 @@ bool Vector::linear_combination(Vector* vectors, Vector coefficients) {
 	}
 	long double * coefficients_array = coefficients.getComponentsAddress();
 	for (int index = 0; index < coefficients.getSize(); index++) {
-		this->axpy(coefficients_array[index], vectors[index]);
+		if (!this->axpy(coefficients_array[index], vectors[index])) return false;
 	}
 	return true;
 }
@@ -85,5 +97,16 @@ long double Vector::dot_product(Vector* y) {
 }
 
 long double Vector::length() {
-	return sqrt(this->dot_product(this));
+	long double max_component = 0;
+	long double * new_data;
+	new_data = new long double [size];
+	for (int index = 0; index < size; index++) {
+		if (components[index] > max_component) max_component = components[index];
+		new_data[index] = components[index];
+	}
+	Vector scaled(new_data, size);
+	scaled.scale(1/max_component);
+	long double result = max_component*sqrt(scaled.dot_product(scaled));
+	delete new_data;
+	return result;
 }
