@@ -47,10 +47,6 @@ Vector::~Vector() {
 	}
 }
 
-long double * Vector::getComponentsAddress() {
-	return components;
-}
-
 int Vector::getSize() {
 	return size;
 }
@@ -103,7 +99,7 @@ bool Vector::axpy(long double alpha, Vector& x) {
 }
 
 Vector Vector::linear_combination(Vector* vectors) {
-	Vector w = Vector::zero_vector(size);
+	Vector w = Vector::zero_vector(vectors[0].getSize());
 	for (int index = 0; index < size; index++) {
 		if (!w.axpy(components[index], vectors[index])) break;
 	}
@@ -137,8 +133,10 @@ long double Vector::length() {
 
 Vector Vector::zero_vector(int size) {
 	long double * elements = new long double [size];
+	for (int index = 0; index < size; index++) {
+		elements[index] = 0;
+	}
 	Vector return_vec(elements, size);
-	return_vec.scale(0);
 	return_vec.set_dynamic(true);
 	return return_vec;
 }

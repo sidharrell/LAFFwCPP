@@ -46,19 +46,19 @@ void test_vector_addition_and_scaling() {
 	cout << ")" << endl;
 }
 void test_linear_combinations() {
-	const int VECTOR_SIZE = 3;
+	const int VECTOR_SIZE1 = 2;
+	const int VECTOR_SIZE2 = 4;
 
-	long double v[VECTOR_SIZE][VECTOR_SIZE] = { {1, 0, 0}, {0, 1, 0}, {0, 0, 1} };
-	long double x[] = {-3, 2, 4};
-	Vector vec_array[] = {Vector(v[0], VECTOR_SIZE),
-			Vector(v[1], VECTOR_SIZE),
-			Vector(v[2], VECTOR_SIZE)};
-	Vector x_vec(x, VECTOR_SIZE);
+	long double v[VECTOR_SIZE1][VECTOR_SIZE2] = { {2, 4, -1, 0}, {1, 0, 1, 0} };
+	long double x[] = {3, 2};
+	Vector vec_array[] = {Vector(v[0], VECTOR_SIZE2),
+			Vector(v[1], VECTOR_SIZE2)};
+	Vector x_vec(x, VECTOR_SIZE1);
 	Vector w_vec = x_vec.linear_combination(vec_array);
 	cout << "linear combination: (";
-	for (int index = 0; index < VECTOR_SIZE; index++) {
+	for (int index = 0; index < VECTOR_SIZE2; index++) {
 		cout << w_vec.components[index];
-		if (index != VECTOR_SIZE-1) cout << ", ";
+		if (index != VECTOR_SIZE2-1) cout << ", ";
 	}
 	cout << ")" << endl;
 }
