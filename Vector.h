@@ -29,9 +29,9 @@
 using namespace std;
 
 class Vector {
-	long double * components;
 	int size;
 public:
+	long double * components;
 	bool dynamic;
 	Vector();
 	Vector& operator= (const Vector&);
@@ -41,14 +41,15 @@ public:
 	long double * getComponentsAddress();
 	int getSize();
 	bool copy(Vector&);
+	void set_dynamic(bool);
 	bool testEquality(Vector& otherVector);
 	Vector add(Vector&);
-	bool scale(long double);
+	void scale(long double);
 	bool axpy(long double, Vector&);
-	bool linear_combination(Vector *, Vector&);
+	Vector linear_combination(Vector *);
 	long double dot_product(Vector&);
-	long double dot_product(Vector *);
 	long double length();
+	Vector	static  zero_vector(int);
 };
 
 #endif /* VECTOR_H_ */

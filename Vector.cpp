@@ -56,75 +56,68 @@ int Vector::getSize() {
 }
 
 bool Vector::copy(Vector& x) {
-	long double * chi = x.getComponentsAddress();
 	int x_size = x.getSize();
 	if (size != x_size) return false;
 	for (int i=0; i<size; i++) {
-		components[i] = chi[i];
+		components[i] = x.components[i];
 	}
 	return true;
 }
 
-bool Vector::testEquality(Vector& otherVector) {
-	long double * otherComponents = otherVector.getComponentsAddress();
-	int otherSize = otherVector.getSize();
-	if (size != otherSize) return false;
-	for (int i = 0; i < otherSize; i++) {
-		if (components[i] != otherComponents[i]) return false;
+void Vector::set_dynamic(bool new_dynamic) {
+	dynamic = new_dynamic;
+}
+
+bool Vector::testEquality(Vector& v) {
+	if (size != v.getSize()) return false;
+	for (int i = 0; i < size; i++) {
+		if (components[i] != v.components[i]) return false;
 	}
 	return true;
 }
 
 Vector Vector::add(Vector& v) {
-	Vector z(v);
-	long double * elements = z.getComponentsAddress();
+	long double * elements = new long double [size];
+	Vector w(elements, size);
+	w.set_dynamic(true);
 	if (size == v.getSize()) {
 		for (int i=0; i<size; i++) {
-			elements[i] += components[i];
+			w.components[i] = v.components[i] + components[i];
 		}
 	}
-	return z;
+	return w;
 }
 
-bool Vector::scale(long double alpha) {
+void Vector::scale(long double alpha) {
 	for (int index = 0; index < size; index++) {
 		components[index] *= alpha;
 	}
-	return true;
 }
 
 bool Vector::axpy(long double alpha, Vector& x) {
 	if (size != x.getSize()) return false;
-	long double * x_components = x.getComponentsAddress();
 	for (int index = 0; index < size; index++) {
-		components[index] += alpha*x_components[index];
+		components[index] += alpha*x.components[index];
 	}
 	return true;
 }
 
-bool Vector::linear_combination(Vector* vectors, Vector& coefficients) {
+Vector Vector::linear_combination(Vector* vectors) {
+	Vector w = Vector::zero_vector(size);
 	for (int index = 0; index < size; index++) {
-		components[index] = 0;
+		if (!w.axpy(components[index], vectors[index])) break;
 	}
-	long double * coefficients_array = coefficients.getComponentsAddress();
-	for (int index = 0; index < coefficients.getSize(); index++) {
-		if (!this->axpy(coefficients_array[index], vectors[index])) return false;
-	}
-	return true;
+	return w;
 }
 
 long double Vector::dot_product(Vector& y) {
 	long double alpha = 0;
-	if (size != y.getSize()) return 0;
-	long double * y_components = y.getComponentsAddress();
-	for (int index = 0; index < size; index++) {
-		alpha += components[index]*y_components[index];
+	if (size == y.getSize()) {
+		for (int index = 0; index < size; index++) {
+			alpha += components[index]*y.components[index];
+		}
 	}
 	return alpha;
-}
-
-long double Vector::dot_product(Vector* y) {
-	return this->dot_product(*y);
 }
 
 long double Vector::length() {
@@ -140,4 +133,12 @@ long double Vector::length() {
 	long double result = max_component*sqrt(scaled.dot_product(scaled));
 	delete new_data;
 	return result;
+}
+
+Vector Vector::zero_vector(int size) {
+	long double * elements = new long double [size];
+	Vector return_vec(elements, size);
+	return_vec.scale(0);
+	return_vec.set_dynamic(true);
+	return return_vec;
 }

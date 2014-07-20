@@ -23,25 +23,24 @@ void test_vector_addition_and_scaling() {
 	cout << "vector 1 == vector 2: " << test << endl;
 
 	Vector output_vector = sample_vector.add(sample_vector2);
-	long double * output = output_vector.getComponentsAddress();
 
 	cout << "vector 3 = vector 1 + vector 2: (";
 	for (int index = 0; index < VECTOR_SIZE; index++) {
-		cout << output[index];
+		cout << output_vector.components[index];
 		if (index != VECTOR_SIZE-1) cout << ", ";
 	}
 	cout << ")" << endl;
 
 	long double product = 1;
 	for (int i=0; i<VECTOR_SIZE; i++) {
-		product *= output[i];
+		product *= output_vector.components[i];
 	}
 	cout << "product of all the components of vector 3: " << product << endl;
 
 	output_vector.scale(-2);
 	cout << "vector 3 scaled by -2: (";
 	for (int index = 0; index < VECTOR_SIZE; index++) {
-		cout << output[index];
+		cout << output_vector.components[index];
 		if (index != VECTOR_SIZE-1) cout << ", ";
 	}
 	cout << ")" << endl;
@@ -51,16 +50,14 @@ void test_linear_combinations() {
 
 	long double v[VECTOR_SIZE][VECTOR_SIZE] = { {1, 0, 0}, {0, 1, 0}, {0, 0, 1} };
 	long double x[] = {-3, 2, 4};
-	long double w[] = {0, 0, 0};
 	Vector vec_array[] = {Vector(v[0], VECTOR_SIZE),
 			Vector(v[1], VECTOR_SIZE),
 			Vector(v[2], VECTOR_SIZE)};
 	Vector x_vec(x, VECTOR_SIZE);
-	Vector w_vec(w, VECTOR_SIZE);
-	w_vec.linear_combination(vec_array, x_vec);
+	Vector w_vec = x_vec.linear_combination(vec_array);
 	cout << "linear combination: (";
 	for (int index = 0; index < VECTOR_SIZE; index++) {
-		cout << w[index];
+		cout << w_vec.components[index];
 		if (index != VECTOR_SIZE-1) cout << ", ";
 	}
 	cout << ")" << endl;
@@ -93,10 +90,9 @@ void test_copy() {
 	long double data2[] = {4, 5, 6};
 	Vector x(data2, VECTOR_SIZE);
 	v.copy(x);
-	long double * result = v.getComponentsAddress();
 	cout << "copy: (";
 	for (int index = 0; index < VECTOR_SIZE; index++) {
-		cout << result[index];
+		cout << v.components[index];
 		if (index != VECTOR_SIZE-1) cout << ", ";
 	}
 	cout << ")" << endl;
