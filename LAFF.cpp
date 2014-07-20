@@ -96,12 +96,6 @@ void test_copy() {
 		if (index != VECTOR_SIZE-1) cout << ", ";
 	}
 	cout << ")" << endl;
-	Vector * mem_test = new Vector[4000000];
-	for (int i=0; i<4000000; i++) mem_test[i] = v;
-	delete[] mem_test;
-	Vector * mem_test2 = new Vector[4000000];
-	for (int i=0; i<4000000; i++) mem_test2[i] = v;
-	delete[] mem_test2;
 }
 
 int main() {

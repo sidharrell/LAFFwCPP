@@ -127,7 +127,7 @@ long double Vector::length() {
 	Vector scaled(new_data, size);
 	scaled.scale(1/max_component);
 	long double result = max_component*sqrt(scaled.dot_product(scaled));
-	delete new_data;
+	delete[] new_data;
 	return result;
 }
 
