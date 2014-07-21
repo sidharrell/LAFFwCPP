@@ -4,7 +4,7 @@
  *  Created on: Jul 19, 2014
  *      Author: sidney
  *
- *      I explicitly removed the copy constructor, destructor, and assignment operator. There is now way
+ *       I explicitly removed the copy constructor, destructor, and assignment operator. There is now way
  *       (as far as I can tell) to prevent a memory leak if I introduce a deep copy. There is only one destructor, and it
  *       cannot distinguish between an object constructed with the constructor, and so whose components have been created
  *       on the heap by the client code, and an object constructed by the copy constructor, and so whose components have
