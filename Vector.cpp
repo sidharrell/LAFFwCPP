@@ -52,8 +52,7 @@ int Vector::getSize() {
 }
 
 bool Vector::copy(Vector& x) {
-	int x_size = x.getSize();
-	if (size != x_size) return false;
+	if (size != x.size) return false;
 	for (int i=0; i<size; i++) {
 		components[i] = x.components[i];
 	}
@@ -65,7 +64,7 @@ void Vector::set_dynamic(bool new_dynamic) {
 }
 
 bool Vector::testEquality(Vector& v) {
-	if (size != v.getSize()) return false;
+	if (size != v.size) return false;
 	for (int i = 0; i < size; i++) {
 		if (components[i] != v.components[i]) return false;
 	}
@@ -76,7 +75,7 @@ Vector Vector::add(Vector& v) {
 	long double * elements = new long double [size];
 	Vector w(elements, size);
 	w.set_dynamic(true);
-	if (size == v.getSize()) {
+	if (size == v.size) {
 		for (int i=0; i<size; i++) {
 			w.components[i] = v.components[i] + components[i];
 		}
@@ -91,7 +90,7 @@ void Vector::scale(long double alpha) {
 }
 
 bool Vector::axpy(long double alpha, Vector& x) {
-	if (size != x.getSize()) return false;
+	if (size != x.size) return false;
 	for (int index = 0; index < size; index++) {
 		components[index] += alpha*x.components[index];
 	}
@@ -108,7 +107,7 @@ Vector Vector::linear_combination(Vector* vectors) {
 
 long double Vector::dot_product(Vector& y) {
 	long double alpha = 0;
-	if (size == y.getSize()) {
+	if (size == y.size) {
 		for (int index = 0; index < size; index++) {
 			alpha += components[index]*y.components[index];
 		}

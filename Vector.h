@@ -4,6 +4,13 @@
  *  Created on: Jul 19, 2014
  *      Author: sidney
  *
+ *      References:
+ *      	[1] "Linear Algebra: Foundations to Frontiers, Notes to LAFF with" by Margaret E. Myers, Pierce M. van de Geijn, and Robert A. van de Geijn
+ *			https://s3.amazonaws.com/ulaff/LAFFNotes.pdf
+ *			[2] "The Science of Programming Matrix Computations" by Robert A. van de Geijn and Enrique S. Quintana-Orti
+ *			http://www.lulu.com/us/en/shop/enrique-s-quintana-ort%C3%AD/the-science-of-programming-matrix-computations/ebook/product-17418498.html
+ *
+ *
  *       I explicitly removed the copy constructor, destructor, and assignment operator. There is now way
  *       (as far as I can tell) to prevent a memory leak if I introduce a deep copy. There is only one destructor, and it
  *       cannot distinguish between an object constructed with the constructor, and so whose components have been created
@@ -65,23 +72,31 @@ public:
 	int getSize(); // gotta make the client code work a little bit
 
 	bool copy(Vector&); // does a element-wise copy of the vector passed in onto the vector of the calling object.
+	// Credit for the algorithm goes to [1], page 10
 
 	bool testEquality(Vector&); // element-wise comparison
+	// Credit for the algorithm goes to [1], page 9, Definition 1.4
 
 	Vector add(Vector&); // adds the calling vector to the passed in vector, creates a new vector and passes it out.
+	// Credit for the algorithm goes to [1], page 12
 
 	void scale(long double); // scales the calling vector by the passed in scalar
+	// Credit for the algorithm goes to [1], page 14
 
 	bool axpy(long double, Vector&); // adds the passed in vector scaled by the passed in scalar to the calling vector.
+	// Credit for the algorithm goes to [1], page 18
 
 	Vector linear_combination(Vector *); // scales the i'th passed in vector by the i'th component of the calling vector
 	// then adds all the resultant vectors together. returned vector's components were allocated internally, so the resultant
 	// vector needs to clean up after itself
+	// Credit for the algorithm goes to [1], page 20
 
 	long double dot_product(Vector&); // returns the scalar resultant from the transpose of the calling vector multiplied by the
 	// passed in vector
+	// Credit for the algorithm goes to [1], page 24
 
 	long double length(); // returns the scalar length of the vector. somewhat protected from overflow.
+	// Credit for the algorithm goes to [1], page 44, the discussion of overflow and underflow
 
 	Vector	static  zero_vector(int); // returns a vector of the passed in length will all elements set to zero
 };
