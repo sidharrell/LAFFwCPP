@@ -42,6 +42,7 @@ public:
 	// Credit for the algorithm goes to [1], page 87
 	Matrix static identityMatrix(int);
 	// Credit for the algorithm goes to [1], page 87
+	// Updated the algorithm with [1], page 90.
 };
 
 #endif /* MATRIX_H_ */
