@@ -66,7 +66,7 @@ public:
 
 	bool copy(Vector&); // does a element-wise copy of the vector passed in onto the vector of the calling object.
 
-	bool testEquality(Vector& otherVector); // element-wise comparison
+	bool testEquality(Vector&); // element-wise comparison
 
 	Vector add(Vector&); // adds the calling vector to the passed in vector, creates a new vector and passes it out.
 
