@@ -78,20 +78,20 @@ bool Matrix::testEquality(Matrix& m) {
 
 Matrix Matrix::zeroMatrix(int size_horizontal, int size_vertical) {
 	long double * components = new long double [size_horizontal*size_vertical];
-	// Partition into Left and Right where Left has 0 columns
+	// Partition new matrix A into A sub Left and A sub Right where A sub Left has 0 columns
 	int horizontal_index = 0;
-	// while size of left is less than size of whole
+	// while size of A sub left is less than size of whole A
 	while (horizontal_index < size_horizontal) {
-		// repartition into Left (matrix A subscript 0 from 0 to less than horizontal index)
-		//                  current (vector a subscript 1)
-		//                  Right (matrix A subscript 2)
+		// repartition into A sub 0 (a matrix that is the sub-matrix of the matrix A from 0 to less than horizontal index)
+		//                  a sub 1 (a vector that is the index'th column vector of the Matrix A)
+		//                  A sub 2 (a matrix that is the sub-matrix of the matrix A from greater than the horizontal index to the horizontal size of A)
 
 		// processing step:
-		// 		set the current column vector to zero
+		// 		set a sub 1 to zero
 		for (int vertical_index=0;vertical_index<size_vertical;vertical_index++) {
 			components[horizontal_index*size_horizontal+vertical_index] = 0;
 		}
-		// Continue with Left redefined as matrix A subscript L from 0 to horizontal index
+		// Continue with a sub 1 moved from A sub Right to a sub Left
 		horizontal_index++;
 	}
 	Matrix return_matrix(components, size_horizontal, size_vertical);
@@ -101,16 +101,16 @@ Matrix Matrix::zeroMatrix(int size_horizontal, int size_vertical) {
 
 Matrix Matrix::identityMatrix(int size) {
 	long double * components = new long double [size*size];
-	// Partition into Left and Right where Left has 0 columns
+	// Partition new matrix A into A sub Left and A sub Right where A sub Left has 0 columns
 	int horizontal_index = 0;
-	// while size of left is less than size of whole
+	// while size of A sub Left is less than size of whole A
 	while (horizontal_index < size) {
-		// repartition into Left (matrix A subscript 0 from 0 to less than horizontal index)
-		//                  current (vector a subscript 1)
-		//                  Right (matrix A subscript 2)
+		// repartition into A sub 0 (a matrix that is the sub-matrix of the matrix A from 0 to less than horizontal index)
+		//                  a sub 1 (a vector that is the index'th column vector of the Matrix A)
+		//                  A sub 2 (a matrix that is the sub-matrix of the matrix A from greater than the horizontal index to the horizontal size of A)
 
 		// processing step:
-		// 		set the current column vector to the correct unit basis vector
+		// 		set the a sub 1 to the correct unit basis vector
 		for (int vertical_index=0;vertical_index<size;vertical_index++) {
 			if (vertical_index == horizontal_index) {
 				components[horizontal_index*size+vertical_index] = 1;
@@ -118,7 +118,7 @@ Matrix Matrix::identityMatrix(int size) {
 				components[horizontal_index*size+vertical_index] = 0;
 			}
 		}
-		// Continue with Left redefined as matrix A subscript L from 0 to horizontal index
+		// Continue with a sub 1 moved from A sub Right to a sub Left
 		horizontal_index++;
 	}
 

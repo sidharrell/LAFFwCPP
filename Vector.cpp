@@ -106,10 +106,30 @@ Vector Vector::linear_combination(Vector* vectors) {
 }
 
 long double Vector::dot_product(Vector& y) {
+	// [2], page 22
+	// x in the text is the vector whose method is called, y is the vector passed into the method
 	long double alpha = 0;
+	// this if loop I added as a sanity check.
 	if (size == y.size) {
-		for (int index = 0; index < size; index++) {
+		// Partition x and y into top subscripted vectors from 0 to less than the index
+		// and bottom subscripted vectors from the index to the size
+		int index = 0;
+		// while size of x sub top is less than all of x
+		while(index < size) {
+			// Repartition into
+			// 		x sub 0, the sub vector of x that is the the vector from 0 to less than the index
+			//		X sub 1, a scalar that is the index'th element of the vector x
+			//		x sub 2, the sub vector of x that is the the vector from greater than the index to size of x
+			// and
+			//		y sub 0, the sub vector of y that is the the vector from 0 to less than the index
+			//		Y sub 1, a scalar that is the index'th element of the vector y
+			//		y sub 2, the sub vector of y that is the vector from greater than the index to size of y
+			//
+			// The processing step:
+			//		alpha increments by the product of X and Y
 			alpha += components[index]*y.components[index];
+			// Continue with the top elements of x and y sub bottom moved to x and y sub top
+			index++;
 		}
 	}
 	return alpha;
