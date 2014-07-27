@@ -15,7 +15,15 @@
 #ifndef MATRIX_H_
 #define MATRIX_H_
 
+/**
+ * The class Matrix should be able to generate zero and identity matrices
+ * and instantiate Matrix objects that can operate on themselves, and
+ * perform GEMV and GEMM operations.
+ */
 class Matrix {
+	/**
+	 *
+	 */
 
 	int size_horizontal;
 	int size_vertical;
@@ -25,10 +33,34 @@ class Matrix {
 
 public:
 
+	/**
+	 * a column-wise 2D array
+	 * so the first column consists from 0 to the size_horizontal-1,
+	 * second column from size_horizontal to 2*size_horizontal-1, etc,
+	 * up to the size_vertical
+	 * size_horizontal and size_vertical are passes into the object on instantiation
+	 */
 	long double * components;
 
 	Matrix();
+
+	/**
+	 *
+	 * @param components
+	 * @param size_horizontal
+	 * @param size_vertical
+	 *
+	 * Remember that components are added column-wise
+	 * so the first column consists from 0 to the size_horizontal-1,
+	 * second column from size_horizontal to 2*size_horizontal-1, etc,
+	 * up to the size_vertical
+	 */
 	Matrix(long double *, int, int);
+
+	/** Copy Constructor
+	 *
+	 * @param matrix to be copied
+	 */
 	Matrix(const Matrix&);
 	Matrix& operator= (const Matrix&);
 	virtual ~Matrix();
