@@ -9,6 +9,7 @@
 #include <iostream>
 #include <array>
 #include "Vector.h"
+#include "Matrix.h"
 using namespace std;
 
 void test_vector_addition_and_scaling() {
@@ -98,6 +99,34 @@ void test_copy() {
 	cout << ")" << endl;
 }
 
+void test_transpose() {
+	const int VECTOR_SIZE_HORIZONTAL = 2;
+	const int VECTOR_SIZE_VERTICAL = 4;
+
+	long double data[] = {
+			1, 2, 3, 4,
+			10, 20, 30, 40
+	};
+
+	long double data2[] = {
+			1, 10, 100,
+			2, 20, 200,
+			3, 30, 300,
+			4, 40, 400
+	};
+	Matrix m(data, VECTOR_SIZE_HORIZONTAL, VECTOR_SIZE_VERTICAL);
+	Matrix n = m.transpose();
+	cout << "transposed: (" << endl;
+	for (int index2 = 0; index2 < VECTOR_SIZE_HORIZONTAL; index2++) {
+		for(int index=0;index<VECTOR_SIZE_VERTICAL;index++) {
+			cout << n.components[index*VECTOR_SIZE_HORIZONTAL+index2];
+			/*if (index != VECTOR_SIZE_HORIZONTAL -1)*/ cout << ", ";
+		}
+		cout << endl;
+	}
+	cout << endl <<")" << endl;
+}
+
 int main() {
 	test_vector_addition_and_scaling();
 
@@ -108,6 +137,8 @@ int main() {
 	test_length();
 
 	test_copy();
+
+	test_transpose();
 
 	string temp;
 

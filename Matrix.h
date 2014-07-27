@@ -15,8 +15,8 @@
 #ifndef MATRIX_H_
 #define MATRIX_H_
 
-
 class Matrix {
+
 	int size_horizontal;
 	int size_vertical;
 	bool dynamic;
@@ -24,6 +24,7 @@ class Matrix {
 	void set_dynamic(bool);
 
 public:
+
 	long double * components;
 
 	Matrix();
@@ -38,11 +39,46 @@ public:
 	bool elemental_copy(Matrix&);
 	bool testEquality(Matrix&);
 
+	bool makeDiagonal();
+	void processMakeDiagonal(int);
+
+	bool makeLowerTriangular();
+	void processMakeLowerTriangular(int);
+
+	bool makeStrictlyLowerTriangular();
+	void processMakeStrictlyLowerTriangular(int);
+
+	bool makeUnitLowerTriangular();
+	void processMakeUnitLowerTriangular(int);
+
+	bool makeUpperTriangular();
+	void processMakeUpperTriangular(int);
+
+	bool makeStrictlyUpperTriangular();
+	void processMakeStrictlyUpperTriangular(int);
+
+	bool makeUnitUpperTriangular();
+	void processMakeUnitUpperTriangular(int);
+
+	Matrix transpose();
+	void processTranspose(long double**, int);
+
 	Matrix static zeroMatrix(int, int);
 	// Credit for the algorithm goes to [1], page 87
+	void processZeroMatrix(int);
+
 	Matrix static identityMatrix(int);
 	// Credit for the algorithm goes to [1], page 87
 	// Updated the algorithm with [1], page 90.
+	void processIdentityMatrix(int);
+
+	typedef void(Matrix::*AfromLtoR)(int);
+	typedef void(Matrix::*AfromTLtoBR)(int);
+	typedef void(Matrix::*AfromLtoR_BfromTtoB)(long double**, int);
+
+	void parseTLtoBR(AfromTLtoBR);
+	void parseLtoR(AfromLtoR);
+	void parseLtoRandTtoB(AfromLtoR_BfromTtoB, long double*);
 };
 
 #endif /* MATRIX_H_ */

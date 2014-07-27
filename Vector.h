@@ -35,7 +35,7 @@
 using namespace std;
 
 class Vector {
-	int size; // size of the array pointed to by the Vector
+
 	bool dynamic; // was the object created in the client code, or in an internal method? If it was created internally,
 	// then responsibility for destroying it lies internally, and it need to be deep cleaned in the destructor, and at
 	// the start of the assignment operator overloading. if it was created in the client code, then responsibility for
@@ -46,6 +46,9 @@ class Vector {
 	// zero_vector and the vector addition method, add.
 
 public:
+
+	int size; // size of the array pointed to by the Vector
+
 	long double * components; // publically accessible because it makes the client code much cleaner. be aware, and don't
 	// trust contents. you don't know where it's been.
 
@@ -68,8 +71,6 @@ public:
 
 	~Vector(); // destructor will free the memory of the components if the components memory was allocated internally, aka.
 	// dynamically.
-
-	int getSize(); // gotta make the client code work a little bit
 
 	bool copy(Vector&); // does a element-wise copy of the vector passed in onto the vector of the calling object.
 	// Credit for the algorithm goes to [1], page 10
@@ -97,6 +98,8 @@ public:
 
 	long double length(); // returns the scalar length of the vector. somewhat protected from overflow.
 	// Credit for the algorithm goes to [1], page 44, the discussion of overflow and underflow
+
+	void set_to_zero();
 
 	Vector	static  zero_vector(int); // returns a vector of the passed in length will all elements set to zero
 };

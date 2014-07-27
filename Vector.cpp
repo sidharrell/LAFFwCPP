@@ -47,10 +47,6 @@ Vector::~Vector() {
 	}
 }
 
-int Vector::getSize() {
-	return size;
-}
-
 bool Vector::copy(Vector& x) {
 	if (size != x.size) return false;
 	for (int i=0; i<size; i++) {
@@ -98,7 +94,7 @@ bool Vector::axpy(long double alpha, Vector& x) {
 }
 
 Vector Vector::linear_combination(Vector* vectors) {
-	Vector w = Vector::zero_vector(vectors[0].getSize());
+	Vector w = Vector::zero_vector(vectors[0].size);
 	for (int index = 0; index < size; index++) {
 		if (!w.axpy(components[index], vectors[index])) break;
 	}
@@ -158,4 +154,10 @@ Vector Vector::zero_vector(int size) {
 	Vector return_vec(elements, size);
 	return_vec.set_dynamic(true);
 	return return_vec;
+}
+
+void Vector::set_to_zero() {
+	for (int index = 0; index < size; index++) {
+		components[index] = 0;
+	}
 }
