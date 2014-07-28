@@ -1,11 +1,14 @@
 /**
 \mainpage LAFFwithCPP Project
 
-I am engaged in the course https://www.edx.org/course/utaustinx/utaustinx-ut-5-01x-linear-algebra-1162#.U9VoynWx3UY
+	I am engaged in the course https://www.edx.org/course/utaustinx/utaustinx-ut-5-01x-linear-algebra-1162#.U9VoynWx3UY
 and would like to follow along with the course material rewriting the algorithms into C++ code. I'm not a big fan
 of Python based on my experience with Python based applications running on Ubuntu. And I wanted to stay with a OOP
 based language. I initially started in PHP, but switched to C++ for performance and portability. If I still want
 to output a webpage with a json stream of the data to the browser for rendering visually in javascript, I can still
 call the C++ library through a native executable interface in PHP. I thought this overall system would spread the
-processing load between the server and the client. 
+processing load between the server and the client.
+	The first layer of abstraction is to create a vector class. I could choose to start lower and create a scalar class, that could switch between long
+double, int, and complex numbers. But if I want to add that it later, I should only need to change the classes dependent on the scalar, which should
+be the vector and matrix classes.
 */

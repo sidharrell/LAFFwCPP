@@ -46,9 +46,9 @@ public:
 
 	/**
 	 *
-	 * @param components
-	 * @param size_horizontal
-	 * @param size_vertical
+	 * @param new_components
+	 * @param new_size_horizontal
+	 * @param new_size_vertical
 	 *
 	 * Remember that components are added column-wise
 	 * so the first column consists from 0 to the size_horizontal-1,
@@ -59,13 +59,28 @@ public:
 
 	/** Copy Constructor
 	 *
-	 * @param matrix to be copied
+	 * @param m Matrix to be copied
 	 */
 	Matrix(const Matrix&);
+
+	/**
+	 *
+	 * @param m Matrix to be used in assignment
+	 * @return
+	 */
 	Matrix& operator= (const Matrix&);
 	virtual ~Matrix();
 
+	/**
+	 *
+	 * @return horizontal size of the Matrix
+	 */
 	int getHorizontalSize() {return size_horizontal;};
+
+	/**
+	 *
+	 * @return vertical size of the Matrix
+	 */
 	int getVerticalSize() {return size_vertical;};
 
 	bool elemental_copy(Matrix&);

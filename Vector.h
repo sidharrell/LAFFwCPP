@@ -34,6 +34,10 @@
 
 using namespace std;
 
+/**
+ * The Vector class should be able to instantiate the zero vector and Vector objects should be able to perform basic
+ * Vector-Scalar and Vector-Vector operations.
+ */
 class Vector {
 
 	bool dynamic; // was the object created in the client code, or in an internal method? If it was created internally,
