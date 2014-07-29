@@ -22,10 +22,11 @@ Vector::Vector(long double * initial_components, int initial_size) {
 }
 
 Vector& Vector::operator =(const Vector& v) {
-	if (dynamic) delete[] components;
+	if (dynamic)
+		delete[] components;
 	size = v.size;
-	components = new long double [size];
-	for (int i=0; i<size; i++) {
+	components = new long double[size];
+	for (int i = 0; i < size; i++) {
 		components[i] = v.components[i];
 	}
 	dynamic = true;
@@ -34,8 +35,8 @@ Vector& Vector::operator =(const Vector& v) {
 
 Vector::Vector(const Vector& v) {
 	size = v.size;
-	components = new long double [size];
-	for (int i=0; i<size; i++) {
+	components = new long double[size];
+	for (int i = 0; i < size; i++) {
 		components[i] = v.components[i];
 	}
 	dynamic = true;
@@ -48,8 +49,9 @@ Vector::~Vector() {
 }
 
 bool Vector::copy(Vector& x) {
-	if (size != x.size) return false;
-	for (int i=0; i<size; i++) {
+	if (size != x.size)
+		return false;
+	for (int i = 0; i < size; i++) {
 		components[i] = x.components[i];
 	}
 	return true;
@@ -60,19 +62,21 @@ void Vector::set_dynamic(bool new_dynamic) {
 }
 
 bool Vector::testEquality(Vector& v) {
-	if (size != v.size) return false;
+	if (size != v.size)
+		return false;
 	for (int i = 0; i < size; i++) {
-		if (components[i] != v.components[i]) return false;
+		if (components[i] != v.components[i])
+			return false;
 	}
 	return true;
 }
 
 Vector Vector::add(Vector& v) {
-	long double * elements = new long double [size];
+	long double * elements = new long double[size];
 	Vector w(elements, size);
 	w.set_dynamic(true);
 	if (size == v.size) {
-		for (int i=0; i<size; i++) {
+		for (int i = 0; i < size; i++) {
 			w.components[i] = v.components[i] + components[i];
 		}
 	}
@@ -86,9 +90,10 @@ void Vector::scale(long double alpha) {
 }
 
 bool Vector::axpy(long double alpha, Vector& x) {
-	if (size != x.size) return false;
+	if (size != x.size)
+		return false;
 	for (int index = 0; index < size; index++) {
-		components[index] += alpha*x.components[index];
+		components[index] += alpha * x.components[index];
 	}
 	return true;
 }
@@ -96,7 +101,8 @@ bool Vector::axpy(long double alpha, Vector& x) {
 Vector Vector::linear_combination(Vector* vectors) {
 	Vector w = Vector::zero_vector(vectors[0].size);
 	for (int index = 0; index < size; index++) {
-		if (!w.axpy(components[index], vectors[index])) break;
+		if (!w.axpy(components[index], vectors[index]))
+			break;
 	}
 	return w;
 }
@@ -111,7 +117,7 @@ long double Vector::dot_product(Vector& y) {
 		// and bottom subscripted vectors from the index to the size
 		int index = 0;
 		// while size of x sub top is less than all of x
-		while(index < size) {
+		while (index < size) {
 			// Repartition into
 			// 		x sub 0, the sub vector of x that is the the vector from 0 to less than the index
 			//		X sub 1, a scalar that is the index'th element of the vector x
@@ -123,7 +129,7 @@ long double Vector::dot_product(Vector& y) {
 			//
 			// The processing step:
 			//		alpha increments by the product of X and Y
-			alpha += components[index]*y.components[index];
+			alpha += components[index] * y.components[index];
 			// Continue with the top elements of x and y sub bottom moved to x and y sub top
 			index++;
 		}
@@ -134,30 +140,31 @@ long double Vector::dot_product(Vector& y) {
 long double Vector::length() {
 	long double max_component = 0;
 	long double * new_data;
-	new_data = new long double [size];
+	new_data = new long double[size];
 	for (int index = 0; index < size; index++) {
-		if (components[index] > max_component) max_component = components[index];
+		if (components[index] > max_component)
+			max_component = components[index];
 		new_data[index] = components[index];
 	}
 	Vector scaled(new_data, size);
-	scaled.scale(1/max_component);
-	long double result = max_component*sqrt(scaled.dot_product(scaled));
+	scaled.scale(1 / max_component);
+	long double result = max_component * sqrt(scaled.dot_product(scaled));
 	delete[] new_data;
 	return result;
-}
-
-Vector Vector::zero_vector(int size) {
-	long double * elements = new long double [size];
-	for (int index = 0; index < size; index++) {
-		elements[index] = 0;
-	}
-	Vector return_vec(elements, size);
-	return_vec.set_dynamic(true);
-	return return_vec;
 }
 
 void Vector::set_to_zero() {
 	for (int index = 0; index < size; index++) {
 		components[index] = 0;
 	}
+}
+
+Vector Vector::zero_vector(int size) {
+	long double * elements = new long double[size];
+	for (int index = 0; index < size; index++) {
+		elements[index] = 0;
+	}
+	Vector return_vec(elements, size);
+	return_vec.set_dynamic(true);
+	return return_vec;
 }

@@ -26,10 +26,83 @@ class Matrix {
 	 */
 
 	int size_horizontal;
+
 	int size_vertical;
+
 	bool dynamic;
 
 	void set_dynamic(bool);
+
+	void _processMakeDiagonal(int);
+
+	void _processMakeLowerTriangular(int);
+
+	void _processMakeStrictlyLowerTriangular(int);
+
+	void _processMakeUnitLowerTriangular(int);
+
+	void _processMakeUpperTriangular(int);
+
+	void _processMakeStrictlyUpperTriangular(int);
+
+	void _processMakeUnitUpperTriangular(int);
+
+	void _processTranspose(Matrix&, int);
+
+	// Credit for the algorithm goes to [1], page 87
+	void _processZeroMatrix(int);
+
+	/**
+	 * The processing step of the matrix A being turned into the identity matrix
+	 * Credit for the algorithm goes to [1], page 87
+	 * Updated the algorithm with [1], page 90.
+	 * @param sizeAtl the current size of A Top Left
+	 */
+	void _processIdentityMatrix(int);
+
+	/**
+	 * Define a pointer to a method of Matrix that takes an integer and returns nothing
+	 * @param an integer
+	 */
+	typedef void (Matrix::*intInVoidOut)(int);
+
+	/**
+	 * Take the current matrix and parse it from the Top Left to the Bottom Right
+	 * @param callback The function that will do the processing step on the Matrix
+	 */
+	void _parseTLtoBR(intInVoidOut);
+
+	/**
+	 * Take the current matrix and parse it from Left to Right
+	 * @param callback The function that will do the processing step on the current vector
+	 */
+	void _parseLtoR(intInVoidOut);
+
+	/**
+	 * Define a pointer to a function that takes in a reference to a Matrix object and an integer and returns nothing
+	 * @param a reference to a Matrix object
+	 * @param an integer
+	 */
+	typedef void (Matrix::*Matrix_intInVoidOut)(Matrix&, int);
+
+	/**
+	 * Take the current matrix of size m x n and parse it from Left to Right,
+	 * at the same time take a matrix B of size p x m and parse it from Top to Bottom.
+	 * @param callback The function that will do the processing step on the current vectors. Since the current vector of B will be a row vector,
+	 *  the callback must accept an array of pointers to long doubles and an int that is the size of A sub 0.
+	 *
+	 * @param b The matrix B.
+	 */
+	void _parseLtoRandTtoB(Matrix_intInVoidOut, Matrix&);
+
+	/**
+	 * Find the index for an array element at the horizontal_position and the vertical_position inside a matrix with a vertical_size
+	 * @param horizontal_position The horizontal postion of the element
+	 * @param vertical_position The vertical position of the element
+	 * @param vertical_size The vertical size of the matrix containing the element
+	 * @return
+	 */
+	int static index(int, int, int);
 
 public:
 
@@ -45,87 +118,129 @@ public:
 	Matrix();
 
 	/**
-	 *
-	 * @param new_components
-	 * @param new_size_horizontal
-	 * @param new_size_vertical
-	 *
+	 * Construct a new Matrix of size m x n that operates on the data provided.
 	 * Remember that components are added column-wise
-	 * so the first column consists from 0 to the size_horizontal-1,
-	 * second column from size_horizontal to 2*size_horizontal-1, etc,
-	 * up to the size_vertical
+	 * so the first column consists of components from 0 to n-1,
+	 * second column from n to (2*n)-1, etc,
+	 * up to m columns
+	 * @param new_components pointer to the array of long doubles. The size of the array should be m * n
+	 * @param new_size_horizontal m
+	 * @param new_size_vertical n
 	 */
 	Matrix(long double *, int, int);
 
-	/** Copy Constructor
-	 *
+	/**
+	 * Copy Constructor
 	 * @param m Matrix to be copied
 	 */
 	Matrix(const Matrix&);
 
 	/**
-	 *
+	 * Copy the Matrix to the right of the assignment operator to the Matrix on the left
 	 * @param m Matrix to be used in assignment
-	 * @return
+	 * @return a reference to the new matrix, same as the old matrix
 	 */
-	Matrix& operator= (const Matrix&);
+	Matrix& operator=(const Matrix&);
+
+	/**
+	 * The Destructor. 'nuff said.
+	 */
 	virtual ~Matrix();
 
 	/**
-	 *
-	 * @return horizontal size of the Matrix
+	 * Get the horizontal size of the current Matrix
+	 * @return the horizontal size
 	 */
-	int getHorizontalSize() {return size_horizontal;};
+	int getHorizontalSize() {
+		return size_horizontal;
+	}
+	;
+
+	/**
+	 * Get the vertical size of the current Matrix
+	 * @return the vertical size
+	 */
+	int getVerticalSize() {
+		return size_vertical;
+	}
+	;
+
+	/**
+	 * Perform an element by element copy of the Matrix B onto the current Matrix
+	 * @param m the Matrix B
+	 * @return true if the operation was successful
+	 */
+	bool elemental_copy(Matrix&);
 
 	/**
 	 *
-	 * @return vertical size of the Matrix
+	 * @param m
+	 * @return
 	 */
-	int getVerticalSize() {return size_vertical;};
-
-	bool elemental_copy(Matrix&);
 	bool testEquality(Matrix&);
 
+	/**
+	 * Perform an operation on the current matrix that makes everything off the diagonal a zero
+	 * @return a false if the operation was unsuccessful
+	 */
 	bool makeDiagonal();
-	void processMakeDiagonal(int);
 
+	/**
+	 * Perform an operation on the current matrix that makes everything above the diagonal a zero
+	 * @return a false if the operation was unsuccessful
+	 */
 	bool makeLowerTriangular();
-	void processMakeLowerTriangular(int);
 
+	/**
+	 * Perform an operation on the current matrix that makes the diagonal all zeros and everything above the diagonal a zero
+	 * @return a false if the operation was unsuccessful
+	 */
 	bool makeStrictlyLowerTriangular();
-	void processMakeStrictlyLowerTriangular(int);
 
+	/**
+	 * Perform an operation on the current matrix that makes the diagonal all ones and everything above the diagonal a zero
+	 * @return a false if the operation was unsuccessful
+	 */
 	bool makeUnitLowerTriangular();
-	void processMakeUnitLowerTriangular(int);
 
+	/**
+	 * Perform an operation on the current matrix that makes everything below the diagonal a zero
+	 * @return a false if the operation was unsuccessful
+	 */
 	bool makeUpperTriangular();
-	void processMakeUpperTriangular(int);
 
+	/**
+	 * Perform an operation on the current matrix that makes the diagonal all zeros and everything below the diagonal a zero
+	 * @return a false if the operation was unsuccessful
+	 */
 	bool makeStrictlyUpperTriangular();
-	void processMakeStrictlyUpperTriangular(int);
 
+	/**
+	 * Perform an operation on the current matrix that makes the diagonal all ones and everything below the diagonal a zero
+	 * @return a false if the operation was unsuccessful
+	 */
 	bool makeUnitUpperTriangular();
-	void processMakeUnitUpperTriangular(int);
 
+	/**
+	 * Produce a matrix of size n x m that is the transpose of the current matrix of size m x n
+	 * @return a matrix that is the transpose of the current matrix
+	 */
 	Matrix transpose();
-	void processTranspose(long double**, int);
 
+	/**
+	 * Produce a matrix of size m x n filled with zeros
+	 * @param size_horizontal m
+	 * @param size_vertical n
+	 * @return a matrix of size m x n
+	 */
 	Matrix static zeroMatrix(int, int);
-	// Credit for the algorithm goes to [1], page 87
-	void processZeroMatrix(int);
 
+	/**
+	 * Produce a matrix of size n x n
+	 * @param sizeA n
+	 * @return a matrix of size n x n
+	 */
 	Matrix static identityMatrix(int);
-	// Credit for the algorithm goes to [1], page 87
-	// Updated the algorithm with [1], page 90.
-	void processIdentityMatrix(int);
-
-	typedef void(Matrix::*AfromLtoR)(int);
-	typedef void(Matrix::*AfromTLtoBR)(int);
-	typedef void(Matrix::*AfromLtoR_BfromTtoB)(long double**, int);
-
-	void parseTLtoBR(AfromTLtoBR);
-	void parseLtoR(AfromLtoR);
-	void parseLtoRandTtoB(AfromLtoR_BfromTtoB, long double*);
 };
 
 #endif /* MATRIX_H_ */

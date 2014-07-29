@@ -8,266 +8,127 @@
 #include "Matrix.h"
 #include <algorithm>
 
-typedef void(Matrix::*AfromLtoR)(int);
-typedef void(Matrix::*AfromTLtoBR)(int);
-typedef void(Matrix::*AfromLtoR_BfromTtoB)(long double*, int);
-
 void Matrix::set_dynamic(bool new_dynamic) {
 	dynamic = new_dynamic;
 }
 
-Matrix::Matrix() {
-	components = 0;
-	size_horizontal = 0;
-	size_vertical = 0;
-	dynamic = false;
-}
-
-Matrix::Matrix(long double* new_components, int new_size_horizontal, int new_size_vertical) {
-	components = new_components;
-	size_horizontal = new_size_horizontal;
-	size_vertical = new_size_vertical;
-	dynamic = false;
-}
-
-Matrix::Matrix(const Matrix& m) {
-	size_horizontal = m.size_horizontal;
-	size_vertical = m.size_vertical;
-	components = new long double [size_horizontal*size_vertical];
-	for (int h=0;h<size_horizontal;h++) {
-		for(int v=0;v<size_vertical;v++) {
-			components[h*size_vertical + v] = m.components[h*size_vertical + v];
-		}
-	}
-	dynamic = true;
-}
-
-Matrix& Matrix::operator =(const Matrix& m) {
-	if (dynamic) delete[] components;
-	size_horizontal = m.size_horizontal;
-	size_vertical = m.size_vertical;
-	components = new long double [size_horizontal*size_vertical];
-	for (int h=0;h<size_horizontal;h++) {
-		for(int v=0;v<size_vertical;v++) {
-			components[h*size_vertical + v] = m.components[h*size_vertical + v];
-		}
-	}
-	dynamic = true;
-	return *this;
-}
-
-Matrix::~Matrix() {
-	if (dynamic) {
-		delete[] components;
-	}
-}
-
-bool Matrix::elemental_copy(Matrix& m) {
-	if (size_horizontal != m.size_horizontal && size_vertical != m.size_vertical) return false;
-	for (int h=0;h<size_horizontal;h++) {
-		for(int v=0;v<size_vertical;v++) {
-			components[h*size_vertical + v] = m.components[h*size_vertical + v];
-		}
-	}
-	return true;
-}
-
-bool Matrix::testEquality(Matrix& m) {
-	if (size_horizontal != m.size_horizontal && size_vertical != m.size_vertical) return false;
-	for (int h=0;h<size_horizontal;h++) {
-		for(int v=0;v<size_vertical;v++) {
-			if (components[h*size_vertical + v] != m.components[h*size_vertical + v]) return false;
-		}
-	}
-	return true;
-}
-
-bool Matrix::makeDiagonal() {
-	if (size_horizontal != size_vertical) return false;
-	this->parseTLtoBR(&Matrix::processMakeDiagonal);
-	return true;
-}
-
-void Matrix::processMakeDiagonal(int sizeAtl) {
+void Matrix::_processMakeDiagonal(int sizeAtl) {
 	Vector a;
 	// processing step:
 
 	// set a to a sub 0 1
-	a.components = components + sizeAtl*size_vertical;
+	a.components = components + sizeAtl * size_vertical;
 	// make sure doesn't run past bottom of matrix
 	a.size = max(sizeAtl, size_vertical);
 	// 		1. set all (a sub 0 1)'s components to 0
 	a.set_to_zero();
 
 	// set a to a sub 2 1
-	a.components = components + sizeAtl*size_vertical + sizeAtl + 1;
+	a.components = components + sizeAtl * size_vertical + sizeAtl + 1;
 	// make sure goes negative if past bottom of matrix
 	a.size = size_vertical - sizeAtl - 1;
 	//		2. set all (a sub 2 1)'s components to 0
 	a.set_to_zero();
 }
 
-bool Matrix::makeLowerTriangular() {
-	if (size_horizontal != size_vertical) return false;
-	this->parseTLtoBR(&Matrix::processMakeLowerTriangular);
-	return true;
-}
-
-void Matrix::processMakeLowerTriangular(int sizeAtl) {
+void Matrix::_processMakeLowerTriangular(int sizeAtl) {
 	Vector a;
 	// processing step:
 
 	// set a to a sub 0 1
-	a.components = components + sizeAtl*size_vertical;
+	a.components = components + sizeAtl * size_vertical;
 	// make sure doesn't run past bottom of matrix
 	a.size = max(sizeAtl, size_vertical);
 	// 		1. set all (a sub 0 1)'s components to 0
 	a.set_to_zero();
 }
 
-bool Matrix::makeStrictlyLowerTriangular() {
-	if (size_horizontal != size_vertical) return false;
-	this->parseTLtoBR(&Matrix::processMakeStrictlyLowerTriangular);
-	return true;
-
-}
-
-void Matrix::processMakeStrictlyLowerTriangular(int sizeAtl) {
+void Matrix::_processMakeStrictlyLowerTriangular(int sizeAtl) {
 	Vector a;
 	// processing step:
 
 	// set a to a sub 0 1
-	a.components = components + sizeAtl*size_vertical;
+	a.components = components + sizeAtl * size_vertical;
 	// make sure doesn't run past bottom of matrix
 	a.size = max(sizeAtl, size_vertical);
 	// 		1. set all (a sub 0 1)'s components to 0
 	a.set_to_zero();
 	//		2. set alpha to 1
-	components[sizeAtl*size_vertical+sizeAtl] = 0;
+	components[sizeAtl * size_vertical + sizeAtl] = 0;
 }
 
-bool Matrix::makeUnitLowerTriangular() {
-	if (size_horizontal != size_vertical) return false;
-	this->parseTLtoBR(&Matrix::processMakeUnitLowerTriangular);
-	return true;
-}
-
-void Matrix::processMakeUnitLowerTriangular(int sizeAtl) {
+void Matrix::_processMakeUnitLowerTriangular(int sizeAtl) {
 	Vector a;
 	// processing step:
 
 	// set a to a sub 0 1
-	a.components = components + sizeAtl*size_vertical;
+	a.components = components + sizeAtl * size_vertical;
 	// make sure doesn't run past bottom of matrix
 	a.size = max(sizeAtl, size_vertical);
 	// 		1. set all (a sub 0 1)'s components to 0
 	a.set_to_zero();
 	//		2. set alpha to 1
-	components[sizeAtl*size_vertical+sizeAtl] = 1;
+	components[sizeAtl * size_vertical + sizeAtl] = 1;
 }
 
-bool Matrix::makeUpperTriangular() {
-	if (size_horizontal != size_vertical) return false;
-	this->parseTLtoBR(&Matrix::processMakeUpperTriangular);
-	return true;
-}
-
-void Matrix::processMakeUpperTriangular(int sizeAtl) {
+void Matrix::_processMakeUpperTriangular(int sizeAtl) {
 	Vector a;
 
 	// set a to a sub 2 1
-	a.components = components + sizeAtl*size_vertical + sizeAtl + 1;
+	a.components = components + sizeAtl * size_vertical + sizeAtl + 1;
 	// make sure goes negative if past bottom of matrix
 	a.size = size_vertical - sizeAtl - 1;
 	//		2. set all (a sub 2 1)'s components to 0
 	a.set_to_zero();
 }
 
-bool Matrix::makeStrictlyUpperTriangular() {
-	if (size_horizontal != size_vertical) return false;
-	this->parseTLtoBR(&Matrix::processMakeStrictlyUpperTriangular);
-	return true;
-}
-
-void Matrix::processMakeStrictlyUpperTriangular(int sizeAtl) {
+void Matrix::_processMakeStrictlyUpperTriangular(int sizeAtl) {
 	Vector a;
 
 	//		2. set alpha to 0
-	components[sizeAtl*size_vertical+sizeAtl] = 0;
+	components[sizeAtl * size_vertical + sizeAtl] = 0;
 
 	// set a to a sub 2 1
-	a.components = components + sizeAtl*size_vertical + sizeAtl + 1;
+	a.components = components + sizeAtl * size_vertical + sizeAtl + 1;
 	// make sure goes negative if past bottom of matrix
 	a.size = size_vertical - sizeAtl - 1;
 	//		2. set all (a sub 2 1)'s components to 0
 	a.set_to_zero();
 }
 
-bool Matrix::makeUnitUpperTriangular() {
-	if (size_horizontal != size_vertical) return false;
-	this->parseTLtoBR(&Matrix::processMakeUnitUpperTriangular);
-	return true;
-}
-
-void Matrix::processMakeUnitUpperTriangular(int sizeAtl) {
+void Matrix::_processMakeUnitUpperTriangular(int sizeAtl) {
 	Vector a;
 
 	//		2. set alpha to 1
-	components[sizeAtl*size_vertical+sizeAtl] = 1;
+	components[sizeAtl * size_vertical + sizeAtl] = 1;
 
 	// set a to a sub 2 1
-	a.components = components + sizeAtl*size_vertical + sizeAtl + 1;
+	a.components = components + sizeAtl * size_vertical + sizeAtl + 1;
 	// make sure goes negative if past bottom of matrix
 	a.size = size_vertical - sizeAtl - 1;
 	//		2. set all (a sub 2 1)'s components to 0
 	a.set_to_zero();
 }
 
-Matrix Matrix::transpose() {
-	long double * components = new long double [size_horizontal*size_vertical];
-	Matrix b(components, size_vertical, size_horizontal);
-	b.set_dynamic(true);
-	this->parseLtoRandTtoB(&Matrix::processTranspose, components);
-	return b;
-}
-
-void Matrix::processTranspose(long double** b_components, int sizeAl) {
-	for (int index=0;index<size_vertical;index++) {
-		long double temp = components[sizeAl*size_vertical+index];
-		*b_components[index] = components[sizeAl*size_vertical+index];
+void Matrix::_processTranspose(Matrix& b, int sizeAl) {
+	for (int index = 0; index < size_vertical; index++) {
+		b.components[this->index(index, sizeAl, b.size_vertical)] =
+				components[this->index(sizeAl, index, size_vertical)];
 	}
 }
 
-Matrix Matrix::zeroMatrix(int size_horizontal, int size_vertical) {
-	long double * components = new long double [size_horizontal*size_vertical];
-	Matrix return_matrix(components, size_horizontal, size_vertical);
-	return_matrix.set_dynamic(true);
-	return_matrix.parseLtoR(&Matrix::processZeroMatrix);
-
-	return return_matrix;
-}
-
-void Matrix::processZeroMatrix(int sizeA_left) {
+void Matrix::_processZeroMatrix(int sizeA_left) {
 	Vector a;
 
 	// set a to the column vector
-	a.components = components + sizeA_left*size_vertical;
+	a.components = components + sizeA_left * size_vertical;
 	a.size = size_vertical;
 
 	// set all a's components to 0
 	a.set_to_zero();
 }
 
-Matrix Matrix::identityMatrix(int sizeA) {
-	long double * components = new long double [sizeA*sizeA];
-	Matrix return_matrix(components, sizeA, sizeA);
-	return_matrix.set_dynamic(true);
-	return_matrix.parseTLtoBR(&Matrix::processIdentityMatrix);
-
-	return return_matrix;
-}
-
-void Matrix::processIdentityMatrix(int sizeAtl) {
+void Matrix::_processIdentityMatrix(int sizeAtl) {
 	Vector a;
 	// there is an implicit guarantee that the size_horizontal == size_vertical
 	// since the Identity matrix is nxn. However, I add a bit of bounds checking
@@ -277,22 +138,24 @@ void Matrix::processIdentityMatrix(int sizeAtl) {
 	// do nothing)
 
 	// set a to a sub 0 1
-	a.components = components + sizeAtl*size_vertical;
+	a.components = components + sizeAtl * size_vertical;
 	a.size = max(sizeAtl, size_vertical);
 	// 		1. set all (a sub 0 1)'s components to 0
 	a.set_to_zero();
 
 	//		2. set alpha to 1
-	components[sizeAtl*size_vertical+sizeAtl] = 1;
+	components[sizeAtl * size_vertical + sizeAtl] = 1;
 
 	// set a to a sub 2 1
-	a.components = components + sizeAtl*size_vertical + sizeAtl + 1;
+	a.components = components + sizeAtl * size_vertical + sizeAtl + 1;
 	a.size = size_vertical - sizeAtl - 1;
 	//		3. set all (a sub 2 1)'s components to 0
 	a.set_to_zero();
 }
 
-void Matrix::parseTLtoBR(AfromTLtoBR callback) {
+typedef void (Matrix::*intInVoidOut)(int);
+
+void Matrix::_parseTLtoBR(intInVoidOut callback) {
 	// Partition A into A sub Top Left, A sub Top Right, A sub Bottom Left, A sub Bottom Right where size of A sub Top Left is 0
 	int sizeAtl = 0;
 	// we can call the size of A sub Top Left the index in the rest of the comments
@@ -324,7 +187,7 @@ void Matrix::parseTLtoBR(AfromTLtoBR callback) {
 
 }
 
-void Matrix::parseLtoR(AfromLtoR callback) {
+void Matrix::_parseLtoR(intInVoidOut callback) {
 	// Partition A into A sub Left, A sub Right where size of A sub Left is 0
 	int sizeAl = 0;
 	// we can call the size of A sub Left the index in the rest of the comments
@@ -343,8 +206,11 @@ void Matrix::parseLtoR(AfromLtoR callback) {
 
 }
 
-void Matrix::parseLtoRandTtoB(AfromLtoR_BfromTtoB callback, long double* matrixBcomponents) {
-	long double ** vectorBsub1Transpose = new long double* [size_vertical];
+typedef void (Matrix::*Matrix_intInVoidOut)(Matrix&, int);
+
+void Matrix::_parseLtoRandTtoB(Matrix_intInVoidOut callback, Matrix& b) {
+	if (size_horizontal != b.size_vertical)
+		return;
 	// Partition A into A sub Left, A sub Right where size of A sub Left is 0
 	int sizeAl = 0;
 	// we can call the size of A sub Left the index in the rest of the comments
@@ -355,14 +221,166 @@ void Matrix::parseLtoRandTtoB(AfromLtoR_BfromTtoB callback, long double* matrixB
 		//					A sub 2 (a matrix that is the sub-matrix of the matrix A from the index horizontally to the size of A horizontally)
 		//                  a sub 1 (the vector that is the index'th column vector of the matrix A)
 
-		for (int index=0;index<size_vertical;index++) {
-			long double temp = matrixBcomponents[index*size_vertical+sizeAl];
-			vectorBsub1Transpose[index] = &matrixBcomponents[index*size_horizontal+sizeAl];
-		}
-
-		(this->*callback)(vectorBsub1Transpose, sizeAl);
+		(this->*callback)(b, sizeAl);
 
 		// Continue with a moving from A sub Right to A sub Left
 		sizeAl++;
 	}
+}
+
+int Matrix::index(int horizontal_position, int vertical_position,
+		int vertical_size) {
+	return horizontal_position * vertical_size + vertical_position;
+}
+
+Matrix::Matrix() {
+	components = 0;
+	size_horizontal = 0;
+	size_vertical = 0;
+	dynamic = false;
+}
+
+Matrix::Matrix(long double* new_components, int new_size_horizontal,
+		int new_size_vertical) {
+	components = new_components;
+	size_horizontal = new_size_horizontal;
+	size_vertical = new_size_vertical;
+	dynamic = false;
+}
+
+Matrix::Matrix(const Matrix& m) {
+	size_horizontal = m.size_horizontal;
+	size_vertical = m.size_vertical;
+	components = new long double[size_horizontal * size_vertical];
+	for (int h = 0; h < size_horizontal; h++) {
+		for (int v = 0; v < size_vertical; v++) {
+			components[h * size_vertical + v] = m.components[h * size_vertical
+					+ v];
+		}
+	}
+	dynamic = true;
+}
+
+Matrix& Matrix::operator =(const Matrix& m) {
+	if (dynamic)
+		delete[] components;
+	size_horizontal = m.size_horizontal;
+	size_vertical = m.size_vertical;
+	components = new long double[size_horizontal * size_vertical];
+	for (int h = 0; h < size_horizontal; h++) {
+		for (int v = 0; v < size_vertical; v++) {
+			components[h * size_vertical + v] = m.components[h * size_vertical
+					+ v];
+		}
+	}
+	dynamic = true;
+	return *this;
+}
+
+Matrix::~Matrix() {
+	if (dynamic) {
+		delete[] components;
+	}
+}
+
+bool Matrix::elemental_copy(Matrix& m) {
+	if (size_horizontal != m.size_horizontal
+			&& size_vertical != m.size_vertical)
+		return false;
+	for (int h = 0; h < size_horizontal; h++) {
+		for (int v = 0; v < size_vertical; v++) {
+			components[h * size_vertical + v] = m.components[h * size_vertical
+					+ v];
+		}
+	}
+	return true;
+}
+
+bool Matrix::testEquality(Matrix& m) {
+	if (size_horizontal != m.size_horizontal
+			&& size_vertical != m.size_vertical)
+		return false;
+	for (int h = 0; h < size_horizontal; h++) {
+		for (int v = 0; v < size_vertical; v++) {
+			if (components[h * size_vertical + v]
+					!= m.components[h * size_vertical + v])
+				return false;
+		}
+	}
+	return true;
+}
+
+bool Matrix::makeDiagonal() {
+	if (size_horizontal != size_vertical)
+		return false;
+	this->_parseTLtoBR(&Matrix::_processMakeDiagonal);
+	return true;
+}
+
+bool Matrix::makeLowerTriangular() {
+	if (size_horizontal != size_vertical)
+		return false;
+	this->_parseTLtoBR(&Matrix::_processMakeLowerTriangular);
+	return true;
+}
+
+bool Matrix::makeStrictlyLowerTriangular() {
+	if (size_horizontal != size_vertical)
+		return false;
+	this->_parseTLtoBR(&Matrix::_processMakeStrictlyLowerTriangular);
+	return true;
+}
+
+bool Matrix::makeUnitLowerTriangular() {
+	if (size_horizontal != size_vertical)
+		return false;
+	this->_parseTLtoBR(&Matrix::_processMakeUnitLowerTriangular);
+	return true;
+}
+
+bool Matrix::makeUpperTriangular() {
+	if (size_horizontal != size_vertical)
+		return false;
+	this->_parseTLtoBR(&Matrix::_processMakeUpperTriangular);
+	return true;
+}
+
+bool Matrix::makeStrictlyUpperTriangular() {
+	if (size_horizontal != size_vertical)
+		return false;
+	this->_parseTLtoBR(&Matrix::_processMakeStrictlyUpperTriangular);
+	return true;
+}
+
+bool Matrix::makeUnitUpperTriangular() {
+	if (size_horizontal != size_vertical)
+		return false;
+	this->_parseTLtoBR(&Matrix::_processMakeUnitUpperTriangular);
+	return true;
+}
+
+Matrix Matrix::transpose() {
+	long double * components = new long double[size_horizontal * size_vertical];
+	Matrix b(components, size_vertical, size_horizontal);
+	b.set_dynamic(true);
+	this->_parseLtoRandTtoB(&Matrix::_processTranspose, b);
+	return b;
+}
+
+Matrix Matrix::zeroMatrix(int size_horizontal, int size_vertical) {
+	long double * components = new long double[size_horizontal * size_vertical];
+	Matrix return_matrix(components, size_horizontal, size_vertical);
+	return_matrix.set_dynamic(true);
+	return_matrix._parseLtoR(&Matrix::_processZeroMatrix);
+
+	return return_matrix;
+}
+
+Matrix Matrix::identityMatrix(int sizeA) {
+	long double * components = new long double[sizeA * sizeA];
+	Matrix return_matrix(components, sizeA, sizeA);
+	return_matrix.set_dynamic(true);
+	return_matrix._parseTLtoBR(&Matrix::_processIdentityMatrix);
+
+	return return_matrix;
 }
