@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.6"/>
-<title>My Project: Vector.h Source File</title>
+<title>LAFFwithCPP: Vector.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -22,7 +22,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
-   <div id="projectname">My Project
+   <div id="projectname">LAFFwithCPP
    </div>
   </td>
  </tr>
@@ -118,82 +118,82 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">using namespace </span>std;</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
-<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="classVector.html">   37</a></span>&#160;<span class="keyword">class </span><a class="code" href="classVector.html">Vector</a> {</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordtype">bool</span> dynamic; <span class="comment">// was the object created in the client code, or in an internal method? If it was created internally,</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="comment">// then responsibility for destroying it lies internally, and it need to be deep cleaned in the destructor, and at</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="comment">// the start of the assignment operator overloading. if it was created in the client code, then responsibility for</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="comment">// freeing the original pointed to memory lies with the client code.</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordtype">void</span> set_dynamic(<span class="keywordtype">bool</span>); <span class="comment">// needed an internal method of switching a vector created by passing in an existing array over</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="comment">// to a vector that holds the only reference to the memory holding the components internally. See the static function</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="comment">// zero_vector and the vector addition method, add.</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="classVector.html">   41</a></span>&#160;<span class="keyword">class </span><a class="code" href="classVector.html">Vector</a> {</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordtype">bool</span> dynamic; <span class="comment">// was the object created in the client code, or in an internal method? If it was created internally,</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="comment">// then responsibility for destroying it lies internally, and it need to be deep cleaned in the destructor, and at</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="comment">// the start of the assignment operator overloading. if it was created in the client code, then responsibility for</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="comment">// freeing the original pointed to memory lies with the client code.</span></div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordtype">int</span> size; <span class="comment">// size of the array pointed to by the Vector</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordtype">void</span> set_dynamic(<span class="keywordtype">bool</span>); <span class="comment">// needed an internal method of switching a vector created by passing in an existing array over</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="comment">// to a vector that holds the only reference to the memory holding the components internally. See the static function</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="comment">// zero_vector and the vector addition method, add.</span></div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keywordtype">long</span> <span class="keywordtype">double</span> * components; <span class="comment">// publically accessible because it makes the client code much cleaner. be aware, and don&#39;t</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="comment">// trust contents. you don&#39;t know where it&#39;s been.</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <a class="code" href="classVector.html">Vector</a>(); <span class="comment">// creates the &#39;zero&#39; vector of length 0. components of the resulting vector is a null pointer (=0)</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="comment">// nothing internal to delete. deletion of the vector object is the responsibility of the client code</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <a class="code" href="classVector.html">Vector</a>&amp; operator= (<span class="keyword">const</span> <a class="code" href="classVector.html">Vector</a>&amp;); <span class="comment">// copies the vector passed in onto the previously declared Vector that is initialized with</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="comment">// the Vector object returned by this method. if the previously declared Vector was created dynamically (by a method</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="comment">// other than creating the array in the client code and passing it into the constructor, so that the memory allocated to the</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="comment">// components was &#39;new&#39;d inside a vector object or static method) then the components memory is freed.</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="comment">// a new array of long doubles is then allocated, then the elements of the vector passed in are copied onto the components,</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="comment">// a new Vector is created, marked as dynamic, and passed to the client code. While the Vector will deallocate it&#39;s own internal</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="comment">// components, it is still the responsibility of the client code to delete the Vector itself.</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <a class="code" href="classVector.html">Vector</a> (<span class="keyword">const</span> <a class="code" href="classVector.html">Vector</a>&amp;); <span class="comment">// creates a copy of the vector passed into the constructor. the array of long doubles</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="comment">// is &#39;new&#39;d in the copy constructor, so it will be deleted in the destructor.</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <a class="code" href="classVector.html">Vector</a>(<span class="keywordtype">long</span> <span class="keywordtype">double</span> * initial_components, <span class="keywordtype">int</span> initial_size); <span class="comment">// non-dynamic Vector is created. it is the responsibility of the</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="comment">// client code to delete the Vector that is created and the components array that was passed in.</span></div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    ~<a class="code" href="classVector.html">Vector</a>(); <span class="comment">// destructor will free the memory of the components if the components memory was allocated internally, aka.</span></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="comment">// dynamically.</span></div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keywordtype">bool</span> copy(<a class="code" href="classVector.html">Vector</a>&amp;); <span class="comment">// does a element-wise copy of the vector passed in onto the vector of the calling object.</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="comment">// Credit for the algorithm goes to [1], page 10</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordtype">bool</span> testEquality(<a class="code" href="classVector.html">Vector</a>&amp;); <span class="comment">// element-wise comparison</span></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="comment">// Credit for the algorithm goes to [1], page 9, Definition 1.4</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <a class="code" href="classVector.html">Vector</a> add(<a class="code" href="classVector.html">Vector</a>&amp;); <span class="comment">// adds the calling vector to the passed in vector, creates a new vector and passes it out.</span></div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="comment">// Credit for the algorithm goes to [1], page 12</span></div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keywordtype">void</span> scale(<span class="keywordtype">long</span> <span class="keywordtype">double</span>); <span class="comment">// scales the calling vector by the passed in scalar</span></div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="comment">// Credit for the algorithm goes to [1], page 14</span></div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keywordtype">bool</span> axpy(<span class="keywordtype">long</span> <span class="keywordtype">double</span>, <a class="code" href="classVector.html">Vector</a>&amp;); <span class="comment">// adds the passed in vector scaled by the passed in scalar to the calling vector.</span></div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="comment">// Credit for the algorithm goes to [1], page 18</span></div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <a class="code" href="classVector.html">Vector</a> linear_combination(<a class="code" href="classVector.html">Vector</a> *); <span class="comment">// scales the i&#39;th passed in vector by the i&#39;th component of the calling vector</span></div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="comment">// then adds all the resultant vectors together. returned vector&#39;s components were allocated internally, so the resultant</span></div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="comment">// vector needs to clean up after itself</span></div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="comment">// Credit for the algorithm goes to [1], page 20</span></div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="keywordtype">long</span> <span class="keywordtype">double</span> dot_product(<a class="code" href="classVector.html">Vector</a>&amp;); <span class="comment">// returns the scalar resultant from the transpose of the calling vector multiplied by the</span></div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="comment">// passed in vector</span></div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="comment">// Credit for the algorithm goes to [1], page 24</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordtype">int</span> size; <span class="comment">// size of the array pointed to by the Vector</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordtype">long</span> <span class="keywordtype">double</span> * components; <span class="comment">// publically accessible because it makes the client code much cleaner. be aware, and don&#39;t</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="comment">// trust contents. you don&#39;t know where it&#39;s been.</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <a class="code" href="classVector.html">Vector</a>(); <span class="comment">// creates the &#39;zero&#39; vector of length 0. components of the resulting vector is a null pointer (=0)</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="comment">// nothing internal to delete. deletion of the vector object is the responsibility of the client code</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <a class="code" href="classVector.html">Vector</a>&amp; operator= (<span class="keyword">const</span> <a class="code" href="classVector.html">Vector</a>&amp;); <span class="comment">// copies the vector passed in onto the previously declared Vector that is initialized with</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="comment">// the Vector object returned by this method. if the previously declared Vector was created dynamically (by a method</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="comment">// other than creating the array in the client code and passing it into the constructor, so that the memory allocated to the</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="comment">// components was &#39;new&#39;d inside a vector object or static method) then the components memory is freed.</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="comment">// a new array of long doubles is then allocated, then the elements of the vector passed in are copied onto the components,</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="comment">// a new Vector is created, marked as dynamic, and passed to the client code. While the Vector will deallocate it&#39;s own internal</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="comment">// components, it is still the responsibility of the client code to delete the Vector itself.</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <a class="code" href="classVector.html">Vector</a> (<span class="keyword">const</span> <a class="code" href="classVector.html">Vector</a>&amp;); <span class="comment">// creates a copy of the vector passed into the constructor. the array of long doubles</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="comment">// is &#39;new&#39;d in the copy constructor, so it will be deleted in the destructor.</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <a class="code" href="classVector.html">Vector</a>(<span class="keywordtype">long</span> <span class="keywordtype">double</span> * initial_components, <span class="keywordtype">int</span> initial_size); <span class="comment">// non-dynamic Vector is created. it is the responsibility of the</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="comment">// client code to delete the Vector that is created and the components array that was passed in.</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    ~<a class="code" href="classVector.html">Vector</a>(); <span class="comment">// destructor will free the memory of the components if the components memory was allocated internally, aka.</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="comment">// dynamically.</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordtype">bool</span> copy(<a class="code" href="classVector.html">Vector</a>&amp;); <span class="comment">// does a element-wise copy of the vector passed in onto the vector of the calling object.</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="comment">// Credit for the algorithm goes to [1], page 10</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordtype">bool</span> testEquality(<a class="code" href="classVector.html">Vector</a>&amp;); <span class="comment">// element-wise comparison</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="comment">// Credit for the algorithm goes to [1], page 9, Definition 1.4</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <a class="code" href="classVector.html">Vector</a> add(<a class="code" href="classVector.html">Vector</a>&amp;); <span class="comment">// adds the calling vector to the passed in vector, creates a new vector and passes it out.</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="comment">// Credit for the algorithm goes to [1], page 12</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="keywordtype">void</span> scale(<span class="keywordtype">long</span> <span class="keywordtype">double</span>); <span class="comment">// scales the calling vector by the passed in scalar</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="comment">// Credit for the algorithm goes to [1], page 14</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="keywordtype">bool</span> axpy(<span class="keywordtype">long</span> <span class="keywordtype">double</span>, <a class="code" href="classVector.html">Vector</a>&amp;); <span class="comment">// adds the passed in vector scaled by the passed in scalar to the calling vector.</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="comment">// Credit for the algorithm goes to [1], page 18</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <a class="code" href="classVector.html">Vector</a> linear_combination(<a class="code" href="classVector.html">Vector</a> *); <span class="comment">// scales the i&#39;th passed in vector by the i&#39;th component of the calling vector</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="comment">// then adds all the resultant vectors together. returned vector&#39;s components were allocated internally, so the resultant</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="comment">// vector needs to clean up after itself</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="comment">// Credit for the algorithm goes to [1], page 20</span></div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keywordtype">long</span> <span class="keywordtype">double</span> length(); <span class="comment">// returns the scalar length of the vector. somewhat protected from overflow.</span></div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="comment">// Credit for the algorithm goes to [1], page 44, the discussion of overflow and underflow</span></div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keywordtype">void</span> set_to_zero();</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <a class="code" href="classVector.html">Vector</a>  <span class="keyword">static</span>  zero_vector(<span class="keywordtype">int</span>); <span class="comment">// returns a vector of the passed in length will all elements set to zero</span></div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;};</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* VECTOR_H_ */</span><span class="preprocessor"></span></div>
-<div class="ttc" id="classVector_html"><div class="ttname"><a href="classVector.html">Vector</a></div><div class="ttdef"><b>Definition:</b> Vector.h:37</div></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keywordtype">long</span> <span class="keywordtype">double</span> dot_product(<a class="code" href="classVector.html">Vector</a>&amp;); <span class="comment">// returns the scalar resultant from the transpose of the calling vector multiplied by the</span></div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="comment">// passed in vector</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="comment">// Credit for the algorithm goes to [1], page 24</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <span class="keywordtype">long</span> <span class="keywordtype">double</span> length(); <span class="comment">// returns the scalar length of the vector. somewhat protected from overflow.</span></div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <span class="comment">// Credit for the algorithm goes to [1], page 44, the discussion of overflow and underflow</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keywordtype">void</span> set_to_zero();</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <a class="code" href="classVector.html">Vector</a>  <span class="keyword">static</span>  zero_vector(<span class="keywordtype">int</span>); <span class="comment">// returns a vector of the passed in length will all elements set to zero</span></div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;};</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* VECTOR_H_ */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="classVector_html"><div class="ttname"><a href="classVector.html">Vector</a></div><div class="ttdef"><b>Definition:</b> Vector.h:41</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jul 27 2014 17:45:35 for My Project by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jul 28 2014 23:20:06 for LAFFwithCPP by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>
