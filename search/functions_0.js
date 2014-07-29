@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['gethorizontalsize',['getHorizontalSize',['../classMatrix.html#aeae5f4b0868f3cafa6b09fcc858ada26',1,'Matrix']]],
-  ['getverticalsize',['getVerticalSize',['../classMatrix.html#ab91811f4ca83eb1a5bc7fff1c2ca6a95',1,'Matrix']]]
+  ['add',['add',['../classVector.html#a40ae6316bffe1ddfb1068fa9434e1ff1',1,'Vector']]],
+  ['axpy',['axpy',['../classVector.html#a6640cb8484e59c0f170b52e623f75fef',1,'Vector']]]
 ];

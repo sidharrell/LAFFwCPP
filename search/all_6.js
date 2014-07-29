@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['parseltor',['parseLtoR',['../classMatrix.html#a36a6c6d0e8929df6ec285fa9885bbdbc',1,'Matrix']]],
-  ['parseltorandttob',['parseLtoRandTtoB',['../classMatrix.html#a8be34c284ac86471c62e767fc4a3f661',1,'Matrix']]]
+  ['laffwithcpp_20project',['LAFFwithCPP Project',['../index.html',1,'']]],
+  ['length',['length',['../classVector.html#a1e34a844681b047a7b37e33e0f6a1065',1,'Vector']]],
+  ['linear_5fcombination',['linear_combination',['../classVector.html#ad6b75253a11700407e751b1014529f9f',1,'Vector']]]
 ];

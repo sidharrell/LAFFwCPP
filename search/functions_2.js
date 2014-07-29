@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['matrix',['Matrix',['../classMatrix.html#a87eaa30e71330c72883644cd4c8e02e4',1,'Matrix::Matrix(long double *, int, int)'],['../classMatrix.html#a0b9cfa2302a0273afb1b26e501f93abc',1,'Matrix::Matrix(const Matrix &amp;)']]]
+  ['dot_5fproduct',['dot_product',['../classVector.html#a60344fec44a0e8e7c8fda219e2e95fb7',1,'Vector']]]
 ];

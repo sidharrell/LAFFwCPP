@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['operator_3d',['operator=',['../classMatrix.html#ae3695797299c70849667c22a098db137',1,'Matrix']]]
+  ['elemental_5fcopy',['elemental_copy',['../classMatrix.html#aa9a89b16ae395f1e30f858ac4271cb88',1,'Matrix']]]
 ];

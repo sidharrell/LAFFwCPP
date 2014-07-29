@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['gethorizontalsize',['getHorizontalSize',['../classMatrix.html#aeae5f4b0868f3cafa6b09fcc858ada26',1,'Matrix']]],
-  ['getverticalsize',['getVerticalSize',['../classMatrix.html#ab91811f4ca83eb1a5bc7fff1c2ca6a95',1,'Matrix']]]
+  ['components',['components',['../classMatrix.html#a015689e10a280ad83d55dc24a9d015e2',1,'Matrix::components()'],['../classVector.html#a3c30ed4437d073d856a63547c3f730f6',1,'Vector::components()']]],
+  ['copy',['copy',['../classVector.html#a046070750b33273f1fd1df09582a28b0',1,'Vector']]]
 ];

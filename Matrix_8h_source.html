@@ -101,89 +101,118 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor"></span></div>
 <div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="classMatrix.html">   23</a></span>&#160;<span class="keyword">class </span><a class="code" href="classMatrix.html">Matrix</a> {</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordtype">int</span> size_horizontal;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordtype">int</span> size_vertical;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordtype">bool</span> dynamic;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordtype">int</span> size_vertical;</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keywordtype">void</span> set_dynamic(<span class="keywordtype">bool</span>);</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keywordtype">bool</span> dynamic;</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordtype">void</span> set_dynamic(<span class="keywordtype">bool</span>);</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div>
-<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="classMatrix.html#a015689e10a280ad83d55dc24a9d015e2">   43</a></span>&#160;    <span class="keywordtype">long</span> <span class="keywordtype">double</span> * <a class="code" href="classMatrix.html#a015689e10a280ad83d55dc24a9d015e2">components</a>;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <a class="code" href="classMatrix.html">Matrix</a>();</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <a class="code" href="classMatrix.html">Matrix</a>(<span class="keywordtype">long</span> <span class="keywordtype">double</span> *, <span class="keywordtype">int</span>, <span class="keywordtype">int</span>);</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <a class="code" href="classMatrix.html">Matrix</a>(<span class="keyword">const</span> <a class="code" href="classMatrix.html">Matrix</a>&amp;);</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <a class="code" href="classMatrix.html">Matrix</a>&amp; <a class="code" href="classMatrix.html#ae3695797299c70849667c22a098db137">operator= </a>(<span class="keyword">const</span> <a class="code" href="classMatrix.html">Matrix</a>&amp;);</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classMatrix.html">Matrix</a>();</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;</div>
-<div class="line"><a name="l00078"></a><span class="lineno"><a class="line" href="classMatrix.html#aeae5f4b0868f3cafa6b09fcc858ada26">   78</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classMatrix.html#aeae5f4b0868f3cafa6b09fcc858ada26">getHorizontalSize</a>() {<span class="keywordflow">return</span> size_horizontal;};</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;</div>
-<div class="line"><a name="l00084"></a><span class="lineno"><a class="line" href="classMatrix.html#ab91811f4ca83eb1a5bc7fff1c2ca6a95">   84</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classMatrix.html#ab91811f4ca83eb1a5bc7fff1c2ca6a95">getVerticalSize</a>() {<span class="keywordflow">return</span> size_vertical;};</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keywordtype">bool</span> elemental_copy(<a class="code" href="classMatrix.html">Matrix</a>&amp;);</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keywordtype">bool</span> testEquality(<a class="code" href="classMatrix.html">Matrix</a>&amp;);</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keywordtype">bool</span> makeDiagonal();</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keywordtype">void</span> processMakeDiagonal(<span class="keywordtype">int</span>);</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keywordtype">bool</span> makeLowerTriangular();</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keywordtype">void</span> processMakeLowerTriangular(<span class="keywordtype">int</span>);</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="keywordtype">bool</span> makeStrictlyLowerTriangular();</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="keywordtype">void</span> processMakeStrictlyLowerTriangular(<span class="keywordtype">int</span>);</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordtype">void</span> _processMakeDiagonal(<span class="keywordtype">int</span>);</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordtype">void</span> _processMakeLowerTriangular(<span class="keywordtype">int</span>);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordtype">void</span> _processMakeStrictlyLowerTriangular(<span class="keywordtype">int</span>);</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordtype">void</span> _processMakeUnitLowerTriangular(<span class="keywordtype">int</span>);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordtype">void</span> _processMakeUpperTriangular(<span class="keywordtype">int</span>);</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordtype">void</span> _processMakeStrictlyUpperTriangular(<span class="keywordtype">int</span>);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordtype">void</span> _processMakeUnitUpperTriangular(<span class="keywordtype">int</span>);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordtype">void</span> _processTranspose(<a class="code" href="classMatrix.html">Matrix</a>&amp;, <span class="keywordtype">int</span>);</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="comment">// Credit for the algorithm goes to [1], page 87</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordtype">void</span> _processZeroMatrix(<span class="keywordtype">int</span>);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordtype">void</span> _processIdentityMatrix(<span class="keywordtype">int</span>);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keyword">typedef</span> void (<a class="code" href="classMatrix.html">Matrix</a>::*intInVoidOut)(int);</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordtype">void</span> _parseTLtoBR(intInVoidOut);</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordtype">void</span> _parseLtoR(intInVoidOut);</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keyword">typedef</span> void (<a class="code" href="classMatrix.html">Matrix</a>::*Matrix_intInVoidOut)(<a class="code" href="classMatrix.html">Matrix</a>&amp;, int);</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="keywordtype">void</span> _parseLtoRandTtoB(Matrix_intInVoidOut, <a class="code" href="classMatrix.html">Matrix</a>&amp;);</div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="keywordtype">bool</span> makeUnitLowerTriangular();</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keywordtype">void</span> processMakeUnitLowerTriangular(<span class="keywordtype">int</span>);</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="keywordtype">bool</span> makeUpperTriangular();</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keywordtype">void</span> processMakeUpperTriangular(<span class="keywordtype">int</span>);</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <span class="keywordtype">bool</span> makeStrictlyUpperTriangular();</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <span class="keywordtype">void</span> processMakeStrictlyUpperTriangular(<span class="keywordtype">int</span>);</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <span class="keywordtype">int</span> <span class="keyword">static</span> index(<span class="keywordtype">int</span>, <span class="keywordtype">int</span>, <span class="keywordtype">int</span>);</div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="keywordtype">bool</span> makeUnitUpperTriangular();</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <span class="keywordtype">void</span> processMakeUnitUpperTriangular(<span class="keywordtype">int</span>);</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <a class="code" href="classMatrix.html">Matrix</a> transpose();</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <span class="keywordtype">void</span> processTranspose(<span class="keywordtype">long</span> <span class="keywordtype">double</span>**, <span class="keywordtype">int</span>);</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <a class="code" href="classMatrix.html">Matrix</a> <span class="keyword">static</span> zeroMatrix(<span class="keywordtype">int</span>, <span class="keywordtype">int</span>);</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <span class="comment">// Credit for the algorithm goes to [1], page 87</span></div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    <span class="keywordtype">void</span> processZeroMatrix(<span class="keywordtype">int</span>);</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    <a class="code" href="classMatrix.html">Matrix</a> <span class="keyword">static</span> identityMatrix(<span class="keywordtype">int</span>);</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    <span class="comment">// Credit for the algorithm goes to [1], page 87</span></div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    <span class="comment">// Updated the algorithm with [1], page 90.</span></div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    <span class="keywordtype">void</span> processIdentityMatrix(<span class="keywordtype">int</span>);</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    <span class="keyword">typedef</span> void(<a class="code" href="classMatrix.html">Matrix</a>::*AfromLtoR)(int);</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    <span class="keyword">typedef</span> void(<a class="code" href="classMatrix.html">Matrix</a>::*AfromTLtoBR)(int);</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    <span class="keyword">typedef</span> void(<a class="code" href="classMatrix.html">Matrix</a>::*AfromLtoR_BfromTtoB)(<span class="keywordtype">long</span> <span class="keywordtype">double</span>**, int);</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    <span class="keywordtype">void</span> parseTLtoBR(AfromTLtoBR);</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classMatrix.html#a36a6c6d0e8929df6ec285fa9885bbdbc">parseLtoR</a>(AfromLtoR);</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classMatrix.html#a8be34c284ac86471c62e767fc4a3f661">parseLtoRandTtoB</a>(AfromLtoR_BfromTtoB, <span class="keywordtype">long</span> <span class="keywordtype">double</span>*);</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    <span class="keywordtype">int</span> <span class="keyword">static</span> <a class="code" href="classMatrix.html#a8c58a99afc9ce88f0672b31a15df1341">index</a>(<span class="keywordtype">int</span>, <span class="keywordtype">int</span>, <span class="keywordtype">int</span>);</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;};</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* MATRIX_H_ */</span><span class="preprocessor"></span></div>
-<div class="ttc" id="classMatrix_html_ae3695797299c70849667c22a098db137"><div class="ttname"><a href="classMatrix.html#ae3695797299c70849667c22a098db137">Matrix::operator=</a></div><div class="ttdeci">Matrix &amp; operator=(const Matrix &amp;)</div><div class="ttdef"><b>Definition:</b> Matrix.cpp:45</div></div>
-<div class="ttc" id="classMatrix_html_aeae5f4b0868f3cafa6b09fcc858ada26"><div class="ttname"><a href="classMatrix.html#aeae5f4b0868f3cafa6b09fcc858ada26">Matrix::getHorizontalSize</a></div><div class="ttdeci">int getHorizontalSize()</div><div class="ttdef"><b>Definition:</b> Matrix.h:78</div></div>
-<div class="ttc" id="classMatrix_html_a8c58a99afc9ce88f0672b31a15df1341"><div class="ttname"><a href="classMatrix.html#a8c58a99afc9ce88f0672b31a15df1341">Matrix::index</a></div><div class="ttdeci">static int index(int, int, int)</div><div class="ttdef"><b>Definition:</b> Matrix.cpp:380</div></div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;</div>
+<div class="line"><a name="l00116"></a><span class="lineno"><a class="line" href="classMatrix.html#a015689e10a280ad83d55dc24a9d015e2">  116</a></span>&#160;    <span class="keywordtype">long</span> <span class="keywordtype">double</span> * <a class="code" href="classMatrix.html#a015689e10a280ad83d55dc24a9d015e2">components</a>;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    <a class="code" href="classMatrix.html">Matrix</a>();</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    <a class="code" href="classMatrix.html">Matrix</a>(<span class="keywordtype">long</span> <span class="keywordtype">double</span> *, <span class="keywordtype">int</span>, <span class="keywordtype">int</span>);</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;    <a class="code" href="classMatrix.html">Matrix</a>(<span class="keyword">const</span> <a class="code" href="classMatrix.html">Matrix</a>&amp;);</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;    <a class="code" href="classMatrix.html">Matrix</a>&amp; <a class="code" href="classMatrix.html#ae3695797299c70849667c22a098db137">operator=</a>(<span class="keyword">const</span> <a class="code" href="classMatrix.html">Matrix</a>&amp;);</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="classMatrix.html#a9b1c3627f573d78a2f08623fdfef990f">~Matrix</a>();</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;</div>
+<div class="line"><a name="l00154"></a><span class="lineno"><a class="line" href="classMatrix.html#aeae5f4b0868f3cafa6b09fcc858ada26">  154</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classMatrix.html#aeae5f4b0868f3cafa6b09fcc858ada26">getHorizontalSize</a>() {</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;        <span class="keywordflow">return</span> size_horizontal;</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;    }</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;    ;</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;</div>
+<div class="line"><a name="l00163"></a><span class="lineno"><a class="line" href="classMatrix.html#ab91811f4ca83eb1a5bc7fff1c2ca6a95">  163</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classMatrix.html#ab91811f4ca83eb1a5bc7fff1c2ca6a95">getVerticalSize</a>() {</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;        <span class="keywordflow">return</span> size_vertical;</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    }</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;    ;</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classMatrix.html#aa9a89b16ae395f1e30f858ac4271cb88">elemental_copy</a>(<a class="code" href="classMatrix.html">Matrix</a>&amp;);</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classMatrix.html#ac139ec9acccc561d3d2fe4ac96af5570">testEquality</a>(<a class="code" href="classMatrix.html">Matrix</a>&amp;);</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classMatrix.html#ab7d4fad73bde1c8e44420a37396caaac">makeDiagonal</a>();</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classMatrix.html#a32dde895879cf314fb6a19602ff9b39c">makeLowerTriangular</a>();</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classMatrix.html#af37d9b78d9c0709ca37f68d988c9a857">makeStrictlyLowerTriangular</a>();</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classMatrix.html#ac26fef8d6ba46c279fdbb6a59f7d78ea">makeUnitLowerTriangular</a>();</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classMatrix.html#ae727398c7b0480a70b41e0efd3a4fc7d">makeUpperTriangular</a>();</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classMatrix.html#ae68b682b69990481da559a19e07f8594">makeStrictlyUpperTriangular</a>();</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classMatrix.html#a743cebef793d48a6d41bc0249062ace6">makeUnitUpperTriangular</a>();</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;    <a class="code" href="classMatrix.html">Matrix</a> <a class="code" href="classMatrix.html#ae23f817021383e3c8636a714dcba1d21">transpose</a>();</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;    <a class="code" href="classMatrix.html">Matrix</a> <span class="keyword">static</span> <a class="code" href="classMatrix.html#abf2e3a6c7d5961e5a001700e4a9b642e">zeroMatrix</a>(<span class="keywordtype">int</span>, <span class="keywordtype">int</span>);</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;    <a class="code" href="classMatrix.html">Matrix</a> <span class="keyword">static</span> <a class="code" href="classMatrix.html#a6c17418c01173943e433c8e8dc3ca2c5">identityMatrix</a>(<span class="keywordtype">int</span>);</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;};</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* MATRIX_H_ */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="classMatrix_html_ae727398c7b0480a70b41e0efd3a4fc7d"><div class="ttname"><a href="classMatrix.html#ae727398c7b0480a70b41e0efd3a4fc7d">Matrix::makeUpperTriangular</a></div><div class="ttdeci">bool makeUpperTriangular()</div><div class="ttdef"><b>Definition:</b> Matrix.cpp:341</div></div>
+<div class="ttc" id="classMatrix_html_ae3695797299c70849667c22a098db137"><div class="ttname"><a href="classMatrix.html#ae3695797299c70849667c22a098db137">Matrix::operator=</a></div><div class="ttdeci">Matrix &amp; operator=(const Matrix &amp;)</div><div class="ttdef"><b>Definition:</b> Matrix.cpp:264</div></div>
+<div class="ttc" id="classMatrix_html_aeae5f4b0868f3cafa6b09fcc858ada26"><div class="ttname"><a href="classMatrix.html#aeae5f4b0868f3cafa6b09fcc858ada26">Matrix::getHorizontalSize</a></div><div class="ttdeci">int getHorizontalSize()</div><div class="ttdef"><b>Definition:</b> Matrix.h:154</div></div>
+<div class="ttc" id="classMatrix_html_a743cebef793d48a6d41bc0249062ace6"><div class="ttname"><a href="classMatrix.html#a743cebef793d48a6d41bc0249062ace6">Matrix::makeUnitUpperTriangular</a></div><div class="ttdeci">bool makeUnitUpperTriangular()</div><div class="ttdef"><b>Definition:</b> Matrix.cpp:355</div></div>
+<div class="ttc" id="classMatrix_html_af37d9b78d9c0709ca37f68d988c9a857"><div class="ttname"><a href="classMatrix.html#af37d9b78d9c0709ca37f68d988c9a857">Matrix::makeStrictlyLowerTriangular</a></div><div class="ttdeci">bool makeStrictlyLowerTriangular()</div><div class="ttdef"><b>Definition:</b> Matrix.cpp:327</div></div>
 <div class="ttc" id="classMatrix_html"><div class="ttname"><a href="classMatrix.html">Matrix</a></div><div class="ttdef"><b>Definition:</b> Matrix.h:23</div></div>
-<div class="ttc" id="classMatrix_html_a36a6c6d0e8929df6ec285fa9885bbdbc"><div class="ttname"><a href="classMatrix.html#a36a6c6d0e8929df6ec285fa9885bbdbc">Matrix::parseLtoR</a></div><div class="ttdeci">void parseLtoR(AfromLtoR)</div><div class="ttdef"><b>Definition:</b> Matrix.cpp:327</div></div>
-<div class="ttc" id="classMatrix_html_ab91811f4ca83eb1a5bc7fff1c2ca6a95"><div class="ttname"><a href="classMatrix.html#ab91811f4ca83eb1a5bc7fff1c2ca6a95">Matrix::getVerticalSize</a></div><div class="ttdeci">int getVerticalSize()</div><div class="ttdef"><b>Definition:</b> Matrix.h:84</div></div>
-<div class="ttc" id="classMatrix_html_a015689e10a280ad83d55dc24a9d015e2"><div class="ttname"><a href="classMatrix.html#a015689e10a280ad83d55dc24a9d015e2">Matrix::components</a></div><div class="ttdeci">long double * components</div><div class="ttdef"><b>Definition:</b> Matrix.h:43</div></div>
-<div class="ttc" id="classMatrix_html_a8be34c284ac86471c62e767fc4a3f661"><div class="ttname"><a href="classMatrix.html#a8be34c284ac86471c62e767fc4a3f661">Matrix::parseLtoRandTtoB</a></div><div class="ttdeci">void parseLtoRandTtoB(AfromLtoR_BfromTtoB, long double *)</div><div class="ttdef"><b>Definition:</b> Matrix.cpp:346</div></div>
+<div class="ttc" id="classMatrix_html_ab91811f4ca83eb1a5bc7fff1c2ca6a95"><div class="ttname"><a href="classMatrix.html#ab91811f4ca83eb1a5bc7fff1c2ca6a95">Matrix::getVerticalSize</a></div><div class="ttdeci">int getVerticalSize()</div><div class="ttdef"><b>Definition:</b> Matrix.h:163</div></div>
+<div class="ttc" id="classMatrix_html_a32dde895879cf314fb6a19602ff9b39c"><div class="ttname"><a href="classMatrix.html#a32dde895879cf314fb6a19602ff9b39c">Matrix::makeLowerTriangular</a></div><div class="ttdeci">bool makeLowerTriangular()</div><div class="ttdef"><b>Definition:</b> Matrix.cpp:320</div></div>
+<div class="ttc" id="classMatrix_html_abf2e3a6c7d5961e5a001700e4a9b642e"><div class="ttname"><a href="classMatrix.html#abf2e3a6c7d5961e5a001700e4a9b642e">Matrix::zeroMatrix</a></div><div class="ttdeci">static Matrix zeroMatrix(int, int)</div><div class="ttdef"><b>Definition:</b> Matrix.cpp:370</div></div>
+<div class="ttc" id="classMatrix_html_aa9a89b16ae395f1e30f858ac4271cb88"><div class="ttname"><a href="classMatrix.html#aa9a89b16ae395f1e30f858ac4271cb88">Matrix::elemental_copy</a></div><div class="ttdeci">bool elemental_copy(Matrix &amp;)</div><div class="ttdef"><b>Definition:</b> Matrix.cpp:286</div></div>
+<div class="ttc" id="classMatrix_html_ac139ec9acccc561d3d2fe4ac96af5570"><div class="ttname"><a href="classMatrix.html#ac139ec9acccc561d3d2fe4ac96af5570">Matrix::testEquality</a></div><div class="ttdeci">bool testEquality(Matrix &amp;)</div><div class="ttdef"><b>Definition:</b> Matrix.cpp:299</div></div>
+<div class="ttc" id="classMatrix_html_a6c17418c01173943e433c8e8dc3ca2c5"><div class="ttname"><a href="classMatrix.html#a6c17418c01173943e433c8e8dc3ca2c5">Matrix::identityMatrix</a></div><div class="ttdeci">static Matrix identityMatrix(int)</div><div class="ttdef"><b>Definition:</b> Matrix.cpp:379</div></div>
+<div class="ttc" id="classMatrix_html_a015689e10a280ad83d55dc24a9d015e2"><div class="ttname"><a href="classMatrix.html#a015689e10a280ad83d55dc24a9d015e2">Matrix::components</a></div><div class="ttdeci">long double * components</div><div class="ttdef"><b>Definition:</b> Matrix.h:116</div></div>
+<div class="ttc" id="classMatrix_html_ae23f817021383e3c8636a714dcba1d21"><div class="ttname"><a href="classMatrix.html#ae23f817021383e3c8636a714dcba1d21">Matrix::transpose</a></div><div class="ttdeci">Matrix transpose()</div><div class="ttdef"><b>Definition:</b> Matrix.cpp:362</div></div>
+<div class="ttc" id="classMatrix_html_ac26fef8d6ba46c279fdbb6a59f7d78ea"><div class="ttname"><a href="classMatrix.html#ac26fef8d6ba46c279fdbb6a59f7d78ea">Matrix::makeUnitLowerTriangular</a></div><div class="ttdeci">bool makeUnitLowerTriangular()</div><div class="ttdef"><b>Definition:</b> Matrix.cpp:334</div></div>
+<div class="ttc" id="classMatrix_html_ae68b682b69990481da559a19e07f8594"><div class="ttname"><a href="classMatrix.html#ae68b682b69990481da559a19e07f8594">Matrix::makeStrictlyUpperTriangular</a></div><div class="ttdeci">bool makeStrictlyUpperTriangular()</div><div class="ttdef"><b>Definition:</b> Matrix.cpp:348</div></div>
+<div class="ttc" id="classMatrix_html_ab7d4fad73bde1c8e44420a37396caaac"><div class="ttname"><a href="classMatrix.html#ab7d4fad73bde1c8e44420a37396caaac">Matrix::makeDiagonal</a></div><div class="ttdeci">bool makeDiagonal()</div><div class="ttdef"><b>Definition:</b> Matrix.cpp:313</div></div>
+<div class="ttc" id="classMatrix_html_a9b1c3627f573d78a2f08623fdfef990f"><div class="ttname"><a href="classMatrix.html#a9b1c3627f573d78a2f08623fdfef990f">Matrix::~Matrix</a></div><div class="ttdeci">virtual ~Matrix()</div><div class="ttdef"><b>Definition:</b> Matrix.cpp:280</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jul 28 2014 23:36:08 for LAFFwithCPP by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Jul 29 2014 03:15:06 for LAFFwithCPP by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

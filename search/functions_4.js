@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['parseltor',['parseLtoR',['../classMatrix.html#a36a6c6d0e8929df6ec285fa9885bbdbc',1,'Matrix']]],
-  ['parseltorandttob',['parseLtoRandTtoB',['../classMatrix.html#a8be34c284ac86471c62e767fc4a3f661',1,'Matrix']]]
+  ['gethorizontalsize',['getHorizontalSize',['../classMatrix.html#aeae5f4b0868f3cafa6b09fcc858ada26',1,'Matrix']]],
+  ['getverticalsize',['getVerticalSize',['../classMatrix.html#ab91811f4ca83eb1a5bc7fff1c2ca6a95',1,'Matrix']]]
 ];
