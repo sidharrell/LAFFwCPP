@@ -18,7 +18,7 @@
 /**
  * The class Matrix should be able to generate zero and identity matrices
  * and instantiate Matrix objects that can operate on themselves, and
- * perform GEMV and GEMM operations. Had to change something.
+ * perform GEMV and GEMM operations.
  */
 class Matrix {
 	/**
