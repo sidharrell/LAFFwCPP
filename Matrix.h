@@ -229,6 +229,7 @@ public:
 
 	/**
 	 * Produce a matrix of size m x n filled with zeros
+	 * Credit for the algorithm goes to [1], page 87
 	 * @param size_horizontal m
 	 * @param size_vertical n
 	 * @return a matrix of size m x n
@@ -237,6 +238,7 @@ public:
 
 	/**
 	 * Produce a matrix of size n x n
+	 * Credit for the algorithm goes to [1], page 89
 	 * @param sizeA n
 	 * @return a matrix of size n x n
 	 */
