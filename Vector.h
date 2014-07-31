@@ -39,14 +39,21 @@ using namespace std;
  */
 class Vector {
 
-	bool dynamic; // was the object created in the client code, or in an internal method? If it was created internally,
+	/**
+	 * was the object created in the client code, or in an internal method? If it was created internally,
 	// then responsibility for destroying it lies internally, and it need to be deep cleaned in the destructor, and at
 	// the start of the assignment operator overloading. if it was created in the client code, then responsibility for
 	// freeing the original pointed to memory lies with the client code.
+	 */
+	bool dynamic;
 
-	void set_dynamic(bool); // needed an internal method of switching a vector created by passing in an existing array over
+	/**
+	 * needed an internal method of switching a vector created by passing in an existing array over
 	// to a vector that holds the only reference to the memory holding the components internally. See the static function
 	// zero_vector and the vector addition method, add.
+	 * @param
+	 */
+	void set_dynamic(bool);
 
 public:
 
@@ -56,7 +63,7 @@ public:
 	 *  processing.  But with great power comes great responsibility. Remember that if you set this larger than your data set, you will
 	 *  stomp on someone else's data.
 	 */
-	int size; // size of the array pointed to by the Vector
+	int size;
 
 	/**
 	 * Publicly accessible because it makes the client code much cleaner. be aware, and leave it lying around. Is there a 3 second rule for data?
